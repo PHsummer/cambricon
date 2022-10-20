@@ -1,0 +1,60 @@
+/opt/conda/lib/python3.8/site-packages/torchvision/transforms/transforms.py:280: UserWarning: Argument interpolation should be of type InterpolationMode instead of int. Please, use InterpolationMode enum.
+  warnings.warn(
+----------------- Options ---------------
+             aspect_ratio: 1.0                           
+               batch_size: 1                             
+          checkpoints_dir: ./checkpoints                 
+                crop_size: 256                           
+                 dataroot: ./datasets/facades            	[default: None]
+             dataset_mode: aligned                       
+                direction: BtoA                          	[default: AtoB]
+          display_winsize: 256                           
+                    epoch: latest                        
+                     eval: False                         
+                  gpu_ids: 0                             
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 3                             
+                  isTrain: False                         	[default: None]
+                load_iter: 0                             	[default: 0]
+                load_size: 256                           
+         max_dataset_size: inf                           
+                    model: pix2pix                       	[default: test]
+               n_layers_D: 3                             
+                     name: facades_pix2pix_resnet_9blocks	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: resnet_9blocks                	[default: unet_256]
+                      ngf: 64                            
+               no_dropout: False                         
+                  no_flip: False                         
+                     norm: batch                         
+                 num_test: 50                            
+              num_threads: 4                             
+                output_nc: 3                             
+                    phase: test                          
+               preprocess: resize_and_crop               
+              results_dir: ./results/                    
+           serial_batches: False                         
+                   suffix:                               
+                use_wandb: False                         
+                  verbose: False                         
+----------------- End -------------------
+dataset [AlignedDataset] was created
+initialize network with normal
+model [Pix2PixModel] was created
+loading the model from ./checkpoints/facades_pix2pix_resnet_9blocks/latest_net_G.pth
+---------- Networks initialized -------------
+[Network G] Total number of parameters : 11.383 M
+-----------------------------------------------
+creating web directory ./results/facades_pix2pix_resnet_9blocks/test_latest
+processing (0000)-th image... ['./datasets/facades/test/1.jpg']
+processing (0005)-th image... ['./datasets/facades/test/103.jpg']
+processing (0010)-th image... ['./datasets/facades/test/12.jpg']
+processing (0015)-th image... ['./datasets/facades/test/17.jpg']
+processing (0020)-th image... ['./datasets/facades/test/21.jpg']
+processing (0025)-th image... ['./datasets/facades/test/26.jpg']
+processing (0030)-th image... ['./datasets/facades/test/30.jpg']
+processing (0035)-th image... ['./datasets/facades/test/35.jpg']
+processing (0040)-th image... ['./datasets/facades/test/4.jpg']
+processing (0045)-th image... ['./datasets/facades/test/44.jpg']

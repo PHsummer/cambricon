@@ -1,0 +1,174 @@
+diff -Nur transformers/examples/legacy/question-answering/run_squad.py question_answering_gpu/run_squad.py
+--- transformers/examples/legacy/question-answering/run_squad.py	2022-08-12 19:03:35.450361000 +0800
++++ question_answering_gpu/run_squad.py	2022-08-15 09:55:10.283746000 +0800
+@@ -54,7 +54,6 @@
+ except ImportError:
+     from tensorboardX import SummaryWriter
+ 
+-
+ logger = logging.getLogger(__name__)
+ 
+ MODEL_CONFIG_CLASSES = list(MODEL_FOR_QUESTION_ANSWERING_MAPPING.keys())
+@@ -118,15 +117,12 @@
+ 
+         model, optimizer = amp.initialize(model, optimizer, opt_level=args.fp16_opt_level)
+ 
+-    # multi-gpu training (should be after apex fp16 initialization)
+-    if args.n_gpu > 1:
+-        model = torch.nn.DataParallel(model)
+ 
+     # Distributed training (should be after apex fp16 initialization)
+     if args.local_rank != -1:
+-        model = torch.nn.parallel.DistributedDataParallel(
+-            model, device_ids=[args.local_rank], output_device=args.local_rank, find_unused_parameters=True
+-        )
++        model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.local_rank])
++    elif args.n_gpu > 1:
++        model = torch.nn.DataParallel(model)
+ 
+     # Train!
+     logger.info("***** Running training *****")
+@@ -172,14 +168,18 @@
+     for _ in train_iterator:
+         epoch_iterator = tqdm(train_dataloader, desc="Iteration", disable=args.local_rank not in [-1, 0])
+         for step, batch in enumerate(epoch_iterator):
+-
+             # Skip past any already trained steps if resuming training
+             if steps_trained_in_current_epoch > 0:
+                 steps_trained_in_current_epoch -= 1
+                 continue
+ 
++            if args.num_train_epochs == 1.0 and step == args.iters:
++                break
++
+             model.train()
+             batch = tuple(t.to(args.device) for t in batch)
++            logger.info("*************************devices************************")
++            logger.info(t.device for t in batch)
+ 
+             inputs = {
+                 "input_ids": batch[0],
+@@ -551,10 +551,8 @@
+         "--max_seq_length",
+         default=384,
+         type=int,
+-        help=(
+-            "The maximum total input sequence length after WordPiece tokenization. Sequences "
+-            "longer than this will be truncated, and sequences shorter than this will be padded."
+-        ),
++        help="The maximum total input sequence length after WordPiece tokenization. Sequences "
++        "longer than this will be truncated, and sequences shorter than this will be padded.",
+     )
+     parser.add_argument(
+         "--doc_stride",
+@@ -566,10 +564,8 @@
+         "--max_query_length",
+         default=64,
+         type=int,
+-        help=(
+-            "The maximum number of tokens for the question. Questions longer than this will "
+-            "be truncated to this length."
+-        ),
++        help="The maximum number of tokens for the question. Questions longer than this will "
++        "be truncated to this length.",
+     )
+     parser.add_argument("--do_train", action="store_true", help="Whether to run training.")
+     parser.add_argument("--do_eval", action="store_true", help="Whether to run eval on the dev set.")
+@@ -614,27 +610,20 @@
+         "--max_answer_length",
+         default=30,
+         type=int,
+-        help=(
+-            "The maximum length of an answer that can be generated. This is needed because the start "
+-            "and end predictions are not conditioned on one another."
+-        ),
++        help="The maximum length of an answer that can be generated. This is needed because the start "
++        "and end predictions are not conditioned on one another.",
+     )
+     parser.add_argument(
+         "--verbose_logging",
+         action="store_true",
+-        help=(
+-            "If true, all of the warnings related to data processing will be printed. "
+-            "A number of warnings are expected for a normal SQuAD evaluation."
+-        ),
++        help="If true, all of the warnings related to data processing will be printed. "
++        "A number of warnings are expected for a normal SQuAD evaluation.",
+     )
+     parser.add_argument(
+         "--lang_id",
+         default=0,
+         type=int,
+-        help=(
+-            "language id of input for language-specific xlm models (see"
+-            " tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)"
+-        ),
++        help="language id of input for language-specific xlm models (see tokenization_xlm.PRETRAINED_INIT_CONFIGURATION)",
+     )
+ 
+     parser.add_argument("--logging_steps", type=int, default=500, help="Log every X updates steps.")
+@@ -663,17 +652,19 @@
+         "--fp16_opt_level",
+         type=str,
+         default="O1",
+-        help=(
+-            "For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']."
+-            "See details at https://nvidia.github.io/apex/amp.html"
+-        ),
++        help="For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']."
++        "See details at https://nvidia.github.io/apex/amp.html",
+     )
+     parser.add_argument("--server_ip", type=str, default="", help="Can be used for distant debugging.")
+     parser.add_argument("--server_port", type=str, default="", help="Can be used for distant debugging.")
+ 
+     parser.add_argument("--threads", type=int, default=1, help="multiple threads for converting example to features")
++    parser.add_argument("--device", type=str, default="", help="Use GPU or MLU to train.")
++    parser.add_argument("--step_per_epoch", type=int, default=-1, help="How many steps in one epoch.")
++    parser.add_argument("--iters", type=int, default=200, help="the iteration where to stop")
+     args = parser.parse_args()
+ 
++
+     if args.doc_stride >= args.max_seq_length - args.max_query_length:
+         logger.warning(
+             "WARNING - You've set a doc stride which may be superior to the document length in some "
+@@ -703,17 +694,18 @@
+         ptvsd.wait_for_attach()
+ 
+     # Setup CUDA, GPU & distributed training
+-    if args.local_rank == -1 or args.no_cuda:
+-        device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
+-        args.n_gpu = 0 if args.no_cuda else torch.cuda.device_count()
+-    else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
+-        torch.cuda.set_device(args.local_rank)
+-        device = torch.device("cuda", args.local_rank)
+-        torch.distributed.init_process_group(backend="nccl")
+-        args.n_gpu = 1
++    if args.device == "gpu":
++        if args.local_rank == -1 or args.no_cuda:
++            device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
++            args.n_gpu = 0 if args.no_cuda else torch.cuda.device_count()
++        else:  # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
++            torch.cuda.set_device(args.local_rank)
++            device = torch.device("cuda", args.local_rank)
++            torch.distributed.init_process_group(backend="nccl")
++            args.n_gpu = 1
+     args.device = device
+ 
+-    # Setup logging
++    # Setup logging`
+     logging.basicConfig(
+         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+         datefmt="%m/%d/%Y %H:%M:%S",
+diff -Nur transformers/examples/legacy/question-answering/run_squad_trainer.py question_answering_gpu/run_squad_trainer.py
+--- transformers/examples/legacy/question-answering/run_squad_trainer.py	2022-08-12 19:03:35.456354000 +0800
++++ question_answering_gpu/run_squad_trainer.py	2022-08-15 09:55:28.672739000 +0800
+@@ -84,8 +84,7 @@
+         and not training_args.overwrite_output_dir
+     ):
+         raise ValueError(
+-            f"Output directory ({training_args.output_dir}) already exists and is not empty. Use"
+-            " --overwrite_output_dir to overcome."
++            f"Output directory ({training_args.output_dir}) already exists and is not empty. Use --overwrite_output_dir to overcome."
+         )
+ 
+     # Setup logging

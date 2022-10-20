@@ -1,0 +1,23 @@
+# this file defines models and related metrics, categories.
+# each model's name shoud be unique
+
+-
+  name: resnet50v1.5
+  metrics:
+    - top1-acc
+    - top5-acc
+  categories:
+    - Image Classification
+-
+  name: bert-base
+  metrics:
+    - f1
+    - em
+  categories:
+    - NLP
+
+# metrics:
+#   "top1-acc": ""
+#   "top5-acc": ""
+#   "f1": ""
+#   "em": ""

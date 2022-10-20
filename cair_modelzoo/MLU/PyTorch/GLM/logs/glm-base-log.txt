@@ -1,0 +1,628 @@
+[2022-06-22 20:25:26,116] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:26,177] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:26,206] [WARNING] [runner.py:159:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2022-06-22 20:25:26,223] [INFO] [runner.py:442:main] cmd = /torch/venv3/pytorch/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=47488 pretrain_glm.py --block-lm --fp16 --bert-prob 1.0 --experiment-name blocklm-blank --model-parallel-size 1 --num-layers 12 --hidden-size 768 --num-attention-heads 12 --seq-length 512 --max-position-embeddings 512 --save ./checkpoints --train-iters 1000 --resume-dataloader --train-data bert-base --tokenizer-type BertWordPieceTokenizer --tokenizer-model-type bert-base-uncased --split 949,50,1 --distributed-backend cncl --lr-decay-style cosine --lr-decay-iters 120000 --lr-decay-ratio 0.05 --warmup .05 --checkpoint-activations --deepspeed --deepspeed_config /projs/framework/huyongan/large_model/cair_modelzoo/MLU/PyTorch/GLM/GLM/config/config_block_base.json
+[2022-06-22 20:25:27,565] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:27,601] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:27,629] [INFO] [launch.py:103:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2022-06-22 20:25:27,629] [INFO] [launch.py:110:main] nnodes=1, num_local_procs=2, node_rank=0
+[2022-06-22 20:25:27,629] [INFO] [launch.py:122:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2022-06-22 20:25:27,629] [INFO] [launch.py:123:main] dist_world_size=2
+[2022-06-22 20:25:27,629] [INFO] [launch.py:125:main] Setting MLU_VISIBLE_DEVICES=0,1
+[2022-06-22 20:25:28,953] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:28,989] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:29,026] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+[2022-06-22 20:25:29,063] [WARNING] [partition_parameters.py:54:<module>] unable to find torch.distributed._all_gather_base. will fall back to torch.distributed.all_gather which will result in suboptimal performance. please consider upgrading your pytorch installation.
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/mlu_model.py:740: UserWarning: torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. When the parameter setting value is 8 or 16, the calculation accuracymay be affected..
+  "torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. "
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/mlu_model.py:740: UserWarning: torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. When the parameter setting value is 8 or 16, the calculation accuracymay be affected..
+  "torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. "
+using world size: 2 and model-parallel size: 1 
+ > using dynamic loss scaling
+> initializing model parallel with size 1
+WARNING: MLU does not set parallel random seed
+WARNING: MLU does not set parallel random seed
+loading BertWordPieceTokenizer ( bert-base-uncased ) from cache_dir  None
+loaded bert-base-uncased
+> padded vocab (size: 30524) with 68 dummy tokens (new size: 30592)
+> found end-of-document token: 0
+[WARNING][/projs/framework/huyongan/pt/catch/torch_mlu/csrc/aten/util/version.cpp:132][operator()][process:111654][thread:139638015809344]: Cambricon NEUWARE minimum version requirements not met! Require CNNL minimum verion is 1.10.3-1, but current version is 1.10.2
+[WARNING][/projs/framework/huyongan/pt/catch/torch_mlu/csrc/aten/util/version.cpp:132][operator()][process:111655][thread:140376412915520]: Cambricon NEUWARE minimum version requirements not met! Require CNNL minimum verion is 1.10.3-1, but current version is 1.10.2
+[6-22 20:25:34] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[6-22 20:25:34] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+configuring data
+=====Create dataset bert-base with 6345098 documents
+Dataset document count 6021498, token count 4448842908, non sentence start0.0
+Dataset document count 317254, token count 236733114, non sentence start0.0
+Dataset document count 6345, token count 5223208, non sentence start0.0
+BERT prob 1.0, gap sent prob 0.0, GPT prob 0.0, infill prob 0.5
+generation min ratio 0.5, block ratio 0.15, gap sent ratio 0.15
+block length distribution [0.14936120510359185, 0.22404180765538775, 0.22404180765538775, 0.16803135574154085, 0.10081881344492458, 0.05040940672246224, 0.02160403145248382, 0.008101511794681432, 0.002700503931560479, 0.0008101511794681439, 0.00022095032167312998, 5.523758041828258e-05, 1.2747133942680616e-05, 2.7315287020029775e-06, 5.463057404005949e-07, 1.0243232632511163e-07, 1.807629288090209e-08, 3.0127154801503496e-09, 4.756919179184761e-10, 7.135378768777153e-11, 1.01933982411102e-11, 1.3900088510604783e-12, 1.8130550231223652e-13, 2.26631877890296e-14, 2.719582534683569e-15, 3.1379798477117986e-16, 3.486644275235373e-17, 3.735690294894986e-18, 3.8645072016155465e-19, 3.864507201615528e-20, 3.739845678982777e-21, 3.5061053240463625e-22, 3.18736847640571e-23, 2.8123839497698246e-24, 2.410614814088421e-25, 2.0088456784069862e-26, 1.6287937933030137e-27, 1.285889836818143e-28, 9.89146028321656e-30]
+block mask prob 0.0, context mask ratio 0.0
+BERT prob 1.0, gap sent prob 0.0, GPT prob 0.0, infill prob 0.5
+generation min ratio 0.5, block ratio 0.15, gap sent ratio 0.15
+block length distribution [0.14936120510359185, 0.22404180765538775, 0.22404180765538775, 0.16803135574154085, 0.10081881344492458, 0.05040940672246224, 0.02160403145248382, 0.008101511794681432, 0.002700503931560479, 0.0008101511794681439, 0.00022095032167312998, 5.523758041828258e-05, 1.2747133942680616e-05, 2.7315287020029775e-06, 5.463057404005949e-07, 1.0243232632511163e-07, 1.807629288090209e-08, 3.0127154801503496e-09, 4.756919179184761e-10, 7.135378768777153e-11, 1.01933982411102e-11, 1.3900088510604783e-12, 1.8130550231223652e-13, 2.26631877890296e-14, 2.719582534683569e-15, 3.1379798477117986e-16, 3.486644275235373e-17, 3.735690294894986e-18, 3.8645072016155465e-19, 3.864507201615528e-20, 3.739845678982777e-21, 3.5061053240463625e-22, 3.18736847640571e-23, 2.8123839497698246e-24, 2.410614814088421e-25, 2.0088456784069862e-26, 1.6287937933030137e-27, 1.285889836818143e-28, 9.89146028321656e-30]
+block mask prob 0.0, context mask ratio 0.0
+BERT prob 1.0, gap sent prob 0.0, GPT prob 0.0, infill prob 0.5
+generation min ratio 0.5, block ratio 0.15, gap sent ratio 0.15
+block length distribution [0.14936120510359185, 0.22404180765538775, 0.22404180765538775, 0.16803135574154085, 0.10081881344492458, 0.05040940672246224, 0.02160403145248382, 0.008101511794681432, 0.002700503931560479, 0.0008101511794681439, 0.00022095032167312998, 5.523758041828258e-05, 1.2747133942680616e-05, 2.7315287020029775e-06, 5.463057404005949e-07, 1.0243232632511163e-07, 1.807629288090209e-08, 3.0127154801503496e-09, 4.756919179184761e-10, 7.135378768777153e-11, 1.01933982411102e-11, 1.3900088510604783e-12, 1.8130550231223652e-13, 2.26631877890296e-14, 2.719582534683569e-15, 3.1379798477117986e-16, 3.486644275235373e-17, 3.735690294894986e-18, 3.8645072016155465e-19, 3.864507201615528e-20, 3.739845678982777e-21, 3.5061053240463625e-22, 3.18736847640571e-23, 2.8123839497698246e-24, 2.410614814088421e-25, 2.0088456784069862e-26, 1.6287937933030137e-27, 1.285889836818143e-28, 9.89146028321656e-30]
+block mask prob 0.0, context mask ratio 0.0
+building GPT2 model ...
+ > number of parameters on model parallel rank 0: 109338624
+DeepSpeed is enabled.
+[2022-06-22 20:26:15,779] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed info: version=0.6.0+3ecc4c1, git-hash=3ecc4c1, git-branch=v0.6.0-sub
+[6-22 20:26:15] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[6-22 20:26:15] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Info]: MLU Direct RDMA is disabled, Host IB will be used.
+[6-22 20:26:16] [LOG_CNCL] [Info]: Enable MDR by setting CNCL_MLU_DIRECT_LEVEL to 1
+[6-22 20:26:16] [LOG_CNCL] [Info]: MLU Direct RDMA is disabled, Host IB will be used.
+[6-22 20:26:16] [LOG_CNCL] [Info]: Enable MDR by setting CNCL_MLU_DIRECT_LEVEL to 1
+[6-22 20:26:16] [LOG_CNCL] [Info]: Build 1 rings. Ring 0: 1--[MLU_LINK]->0--[MLU_LINK]->1
+[6-22 20:26:16] [LOG_CNCL] [Info]: Build 1 rings. Ring 0: 0--[MLU_LINK]->1--[MLU_LINK]->0
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:16] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[2022-06-22 20:26:16,275] [INFO] [engine.py:284:__init__] DeepSpeed Flops Profiler Enabled: False
+[2022-06-22 20:26:16,276] [INFO] [engine.py:1072:_configure_optimizer] Using DeepSpeed Optimizer param name adam as basic optimizer
+[2022-06-22 20:26:16,290] [INFO] [engine.py:1079:_configure_optimizer] DeepSpeed Basic Optimizer = FusedAdam
+[2022-06-22 20:26:16,290] [INFO] [logging.py:69:log_dist] [Rank 0] Creating fp16 optimizer with dynamic loss scale
+[2022-06-22 20:26:16,308] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed Final Optimizer = adam
+[2022-06-22 20:26:16,308] [INFO] [engine.py:792:_configure_lr_scheduler] DeepSpeed using client LR scheduler
+[2022-06-22 20:26:16,308] [INFO] [logging.py:69:log_dist] [Rank 0] DeepSpeed LR Scheduler = None
+[2022-06-22 20:26:16,309] [INFO] [logging.py:69:log_dist] [Rank 0] step=0, skipped=0, lr=[0.0004, 0.0004], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:26:16,310] [INFO] [config.py:1058:print] DeepSpeedEngine configuration:
+[2022-06-22 20:26:16,312] [INFO] [config.py:1062:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2022-06-22 20:26:16,312] [INFO] [config.py:1062:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2022-06-22 20:26:16,312] [INFO] [config.py:1062:print]   amp_enabled .................. False
+[2022-06-22 20:26:16,312] [INFO] [config.py:1062:print]   amp_params ................... False
+[2022-06-22 20:26:16,313] [INFO] [config.py:1062:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": null, 
+    "exps_dir": null, 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2022-06-22 20:26:16,313] [INFO] [config.py:1062:print]   bfloat16_enabled ............. False
+[2022-06-22 20:26:16,313] [INFO] [config.py:1062:print]   checkpoint_tag_validation_enabled  True
+[2022-06-22 20:26:16,313] [INFO] [config.py:1062:print]   checkpoint_tag_validation_fail  False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   communication_data_type ...... None
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   curriculum_enabled ........... False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   curriculum_params ............ False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   dataloader_drop_last ......... False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   disable_allgather ............ False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   dump_state ................... False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   dynamic_loss_scale_args ...... {'init_scale': 4294967296, 'scale_window': 1000, 'delayed_shift': 2, 'min_scale': 1}
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   eigenvalue_enabled ........... False
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   eigenvalue_gas_boundary_resolution  1
+[2022-06-22 20:26:16,314] [INFO] [config.py:1062:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   eigenvalue_layer_num ......... 0
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   eigenvalue_max_iter .......... 100
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   eigenvalue_stability ......... 1e-06
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   eigenvalue_tol ............... 0.01
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   eigenvalue_verbose ........... False
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   elasticity_enabled ........... False
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   fp16_enabled ................. True
+[2022-06-22 20:26:16,315] [INFO] [config.py:1062:print]   fp16_master_weights_and_gradients  False
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   fp16_mixed_quantize .......... False
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   global_rank .................. 0
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   gradient_accumulation_steps .. 1
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   gradient_clipping ............ 1.0
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   gradient_predivide_factor .... 1.0
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   initial_dynamic_scale ........ 4294967296
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   loss_scale ................... 0
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   memory_breakdown ............. False
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   optimizer_legacy_fusion ...... False
+[2022-06-22 20:26:16,316] [INFO] [config.py:1062:print]   optimizer_name ............... adam
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   optimizer_params ............. {'lr': 0.0004, 'weight_decay': 0.1, 'betas': [0.9, 0.98], 'eps': 1e-06}
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0}
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   pld_enabled .................. False
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   pld_params ................... False
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   prescale_gradients ........... False
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   quantize_change_rate ......... 0.001
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   quantize_groups .............. 1
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   quantize_offset .............. 1000
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   quantize_period .............. 1000
+[2022-06-22 20:26:16,317] [INFO] [config.py:1062:print]   quantize_rounding ............ 0
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   quantize_start_bits .......... 16
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   quantize_target_bits ......... 8
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   quantize_training_enabled .... False
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   quantize_type ................ 0
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   quantize_verbose ............. False
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   scheduler_name ............... None
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   scheduler_params ............. None
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   sparse_attention ............. None
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   sparse_gradients_enabled ..... False
+[2022-06-22 20:26:16,318] [INFO] [config.py:1062:print]   steps_per_print .............. 100
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   tensorboard_enabled .......... False
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   tensorboard_job_name ......... DeepSpeedJobName
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   tensorboard_output_path ...... 
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   train_batch_size ............. 32
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   train_micro_batch_size_per_gpu  16
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   use_quantizer_kernel ......... False
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   wall_clock_breakdown ......... False
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   world_size ................... 2
+[2022-06-22 20:26:16,319] [INFO] [config.py:1062:print]   zero_allow_untested_optimizer  False
+[2022-06-22 20:26:16,320] [INFO] [config.py:1062:print]   zero_config .................. {
+    "stage": 0, 
+    "contiguous_gradients": true, 
+    "reduce_scatter": true, 
+    "reduce_bucket_size": 5.000000e+08, 
+    "allgather_partitions": true, 
+    "allgather_bucket_size": 5.000000e+08, 
+    "overlap_comm": false, 
+    "load_from_fp32_weights": true, 
+    "elastic_checkpoint": false, 
+    "offload_param": null, 
+    "offload_optimizer": null, 
+    "sub_group_size": 1.000000e+09, 
+    "prefetch_bucket_size": 5.000000e+07, 
+    "param_persistence_threshold": 1.000000e+05, 
+    "max_live_parameters": 1.000000e+09, 
+    "max_reuse_distance": 1.000000e+09, 
+    "gather_16bit_weights_on_model_save": false, 
+    "ignore_unused_parameters": true, 
+    "round_robin_gradients": false, 
+    "legacy_stage1": false
+}
+[2022-06-22 20:26:16,320] [INFO] [config.py:1062:print]   zero_enabled ................. False
+[2022-06-22 20:26:16,320] [INFO] [config.py:1062:print]   zero_optimization_stage ...... 0
+[2022-06-22 20:26:16,321] [INFO] [config.py:1071:print]   json = {
+    "train_micro_batch_size_per_gpu": 16, 
+    "gradient_accumulation_steps": 1, 
+    "steps_per_print": 100, 
+    "gradient_clipping": 1.0, 
+    "fp16": {
+        "enabled": true, 
+        "loss_scale": 0, 
+        "loss_scale_window": 1000, 
+        "hysteresis": 2, 
+        "min_loss_scale": 1
+    }, 
+    "optimizer": {
+        "type": "Adam", 
+        "params": {
+            "lr": 0.0004, 
+            "weight_decay": 0.1, 
+            "betas": [0.9, 0.98], 
+            "eps": 1e-06
+        }
+    }, 
+    "activation_checkpointing": {
+        "partition_activations": false, 
+        "contiguous_memory_optimization": false
+    }, 
+    "wall_clock_breakdown": false
+}
+Using /home/huyongan/.cache/torch_extensions as PyTorch extensions root...
+Using /home/huyongan/.cache/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/huyongan/.cache/torch_extensions/utils/build.ninja...
+Building extension module utils...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Loading extension module utils...
+Time to load utils op: 0.3867487907409668 seconds
+Loading extension module utils...
+Time to load utils op: 0.4034583568572998 seconds
+learning rate decaying style cosine, ratio 20.0
+[6-22 20:26:19] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[6-22 20:26:19] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Info]: Build 1 rings. Ring 0: 1--[MLU_LINK]->0--[MLU_LINK]->1
+[6-22 20:26:19] [LOG_CNCL] [Info]: Build 1 rings. Ring 0: 0--[MLU_LINK]->1--[MLU_LINK]->0
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 1 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 1 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 0 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+[6-22 20:26:19] [LOG_CNCL] [Warning]: MLU-Link on port 1 of device 0 is establishing, which is not enable for communication this time. If you want to use it, please wait for a while until the port is enabled. You can check the status of port by command `cnmon mlulink -c 0 -s`.
+Pretrain GPT2 model
+arguments:
+  transformer_xl ............... False
+  pretrained_bert .............. False
+  encoder_decoder .............. False
+  attention_dropout ............ 0.1
+  num_attention_heads .......... 12
+  hidden_size .................. 768
+  intermediate_size ............ None
+  num_layers ................... 12
+  layernorm_epsilon ............ 1e-05
+  hidden_dropout ............... 0.1
+  output_dropout ............... 0.1
+  max_position_embeddings ...... 512
+  vocab_size ................... 30592
+  deep_init .................... False
+  make_vocab_size_divisible_by . 128
+  cpu_optimizer ................ False
+  cpu_torch_adam ............... False
+  fp16 ......................... True
+  fp32_embedding ............... False
+  fp32_layernorm ............... False
+  fp32_tokentypes .............. False
+  fp32_allreduce ............... False
+  hysteresis ................... 2
+  loss_scale ................... None
+  loss_scale_window ............ 1000
+  min_scale .................... 1
+  attention_scale .............. 1.0
+  experiment_name .............. blocklm-blank06-22-20-25
+  batch_size ................... 16
+  gradient_accumulation_steps .. 1
+  weight_decay ................. 0.1
+  checkpoint_activations ....... True
+  checkpoint_num_layers ........ 1
+  deepspeed_activation_checkpointing  False
+  epochs ....................... None
+  clip_grad .................... 1.0
+  train_iters .................. 1000
+  label_smoothing .............. 0.0
+  log_interval ................. 100
+  summary_dir .................. 
+  seed ......................... 1234
+  reset_position_ids ........... False
+  reset_attention_mask ......... False
+  lr_decay_iters ............... 120000
+  lr_decay_style ............... cosine
+  lr_decay_ratio ............... 0.05
+  lr ........................... 0.0004
+  warmup ....................... 0.05
+  switch_linear ................ False
+  save ......................... ./checkpoints/blocklm-blank06-22-20-25
+  new_save_directory ........... False
+  save_epoch ................... 1
+  save_interval ................ 5000
+  no_save_optim ................ False
+  no_save_rng .................. False
+  load ......................... None
+  no_load_optim ................ False
+  no_load_rng .................. False
+  no_load_lr_scheduler ......... False
+  no_deepspeed_load ............ False
+  finetune ..................... False
+  resume_dataloader ............ True
+  distributed_backend .......... cncl
+  DDP_impl ..................... torch
+  local_rank ................... 0
+  block_lm ..................... True
+  masked_lm .................... False
+  bert_prob .................... 1.0
+  gpt_infill_prob .............. 0.5
+  gpt_min_ratio ................ 0.5
+  gap_sentence_prob ............ 0.0
+  gap_sentence_ratio ........... 0.15
+  avg_block_length ............. 3
+  short_seq_prob ............... 0.0
+  single_span_prob ............. 0.0
+  task_mask .................... False
+  no_shuffle_block ............. False
+  no_block_position ............ False
+  sentinel_token ............... False
+  block_mask_prob .............. 0.0
+  context_mask_ratio ........... 0.0
+  random_position .............. False
+  eval_batch_size .............. None
+  eval_iters ................... 100
+  eval_interval ................ 1000
+  eval_epoch ................... 1
+  eval_seq_length .............. None
+  eval_max_preds_per_seq ....... None
+  overlapping_eval ............. 32
+  temperature .................. 1.0
+  top_p ........................ 0.0
+  top_k ........................ 0
+  out_seq_length ............... 256
+  num_beams .................... 1
+  length_penalty ............... 0.0
+  no_repeat_ngram_size ......... 0
+  min_tgt_length ............... 0
+  select_topk .................. False
+  blank_maskratio .............. 0.1
+  model_parallel_size .......... 1
+  shuffle ...................... False
+  filter_english ............... False
+  train_data ................... ['bert-base']
+  valid_data ................... None
+  test_data .................... None
+  data_dir ..................... None
+  input_data_sizes_file ........ sizes.txt
+  delim ........................ ,
+  text_key ..................... sentence
+  eval_text_key ................ None
+  split ........................ 949,50,1
+  no_lazy_loader ............... False
+  half_lazy_loader ............. False
+  loader_scatter ............... None
+  loose_json ................... False
+  presplit_sentences ........... False
+  num_workers .................. 2
+  tokenizer_model_type ......... bert-base-uncased
+  tokenizer_path ............... tokenizer.model
+  tokenizer_type ............... BertWordPieceTokenizer
+  no_pre_tokenize .............. False
+  cache_dir .................... None
+  use_tfrecords ................ False
+  seq_length ................... 512
+  mem_length ................... 0
+  max_preds_per_seq ............ None
+  non_sentence_start ........... 0.0
+  sample_one_document .......... False
+  load_splits .................. None
+  save_splits .................. None
+  save_test_data ............... None
+  multi_task_data .............. None
+  multi_task_ratio ............. 0.0
+  multi_seq_length ............. None
+  multi_batch_size ............. None
+  task ......................... None
+  load_pretrained .............. None
+  pool_token ................... cls
+  cloze_eval ................... False
+  multi_token .................. False
+  segment_length ............... 0
+  loss_func .................... cross_entropy
+  block_lm_ratio ............... 0.0
+  adapet ....................... False
+  pattern_id ................... 0
+  fast_decode .................. False
+  few_superglue ................ False
+  eval_valid ................... False
+  validation_metric ............ None
+  unidirectional ............... False
+  src_seq_length ............... None
+  tgt_seq_length ............... None
+  adam_beta1 ................... 0.9
+  adam_beta2 ................... 0.999
+  adam_eps ..................... 1e-08
+  optimizer .................... adam
+  wsc_negative ................. False
+  overwrite .................... False
+  no_validation ................ False
+  continuous_prompt ............ False
+  num_prompt_tokens ............ 0
+  prompt_func .................. lstm
+  freeze_transformer ........... False
+  tune_prefix_layers ........... None
+  prefix_prompt ................ 0
+  prompt_init .................. False
+  deepspeed .................... True
+  deepspeed_config ............. /projs/framework/huyongan/large_model/cair_modelzoo/MLU/PyTorch/GLM/GLM/config/config_block_base.json
+  deepscale .................... False
+  deepscale_config ............. None
+  deepspeed_mpi ................ False
+  cuda ......................... False
+  rank ......................... 0
+  world_size ................... 2
+  dynamic_loss_scale ........... True
+  master_ip .................... 127.0.0.1
+  master_port .................. 47488
+  eod_token .................... 0
+  persist_state ................ 0
+  lazy ......................... False
+  transpose .................... False
+  data_set_type ................ Block
+  samples_per_shard ............ 100
+  do_train ..................... 1
+  do_valid ..................... 1
+  do_test ...................... 1
+  iteration .................... 0
+  log_dir ...................... runs/blocklm-blank06-22-20-25
+Resume dataloader
+Partition Activations False and Correctness Check False
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/device/queue.py:18: UserWarning: torch_mlu.core.device.Queue is deprecated, please use torch.mlu.Stream instead.
+  warnings.warn("torch_mlu.core.device.Queue is deprecated, please use torch.mlu.Stream instead.")
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/device/queue.py:18: UserWarning: torch_mlu.core.device.Queue is deprecated, please use torch.mlu.Stream instead.
+  warnings.warn("torch_mlu.core.device.Queue is deprecated, please use torch.mlu.Stream instead.")
+[2022-06-22 20:26:20,976] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 0
+[2022-06-22 20:26:20,976] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 4294967296 to 2147483648.0
+[2022-06-22 20:26:20,976] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 0
+[2022-06-22 20:26:20,977] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 4294967296 to 2147483648.0
+[2022-06-22 20:26:20,977] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 4294967296, reducing to 2147483648.0
+[2022-06-22 20:26:21,727] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 1
+[2022-06-22 20:26:21,727] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 2147483648.0 to 1073741824.0
+[2022-06-22 20:26:21,727] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 1
+[2022-06-22 20:26:21,727] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 2147483648.0 to 1073741824.0
+[2022-06-22 20:26:21,727] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 2147483648.0, reducing to 1073741824.0
+[2022-06-22 20:26:22,461] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 2
+[2022-06-22 20:26:22,461] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 1073741824.0 to 536870912.0
+[2022-06-22 20:26:22,461] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 2
+[2022-06-22 20:26:22,461] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 1073741824.0 to 536870912.0
+[2022-06-22 20:26:22,461] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 1073741824.0, reducing to 536870912.0
+[2022-06-22 20:26:23,191] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 3
+[2022-06-22 20:26:23,192] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 536870912.0 to 268435456.0
+[2022-06-22 20:26:23,195] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 3
+[2022-06-22 20:26:23,195] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 536870912.0 to 268435456.0
+[2022-06-22 20:26:23,196] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 536870912.0, reducing to 268435456.0
+[2022-06-22 20:26:23,934] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 4
+[2022-06-22 20:26:23,935] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 268435456.0 to 134217728.0
+[2022-06-22 20:26:23,935] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 4
+[2022-06-22 20:26:23,935] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 268435456.0 to 134217728.0
+[2022-06-22 20:26:23,935] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 268435456.0, reducing to 134217728.0
+[2022-06-22 20:26:24,668] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 5
+[2022-06-22 20:26:24,668] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 134217728.0 to 67108864.0
+[2022-06-22 20:26:24,669] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 5
+[2022-06-22 20:26:24,669] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 134217728.0 to 67108864.0
+[2022-06-22 20:26:24,669] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 134217728.0, reducing to 67108864.0
+[2022-06-22 20:26:25,414] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 6
+[2022-06-22 20:26:25,414] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 67108864.0 to 33554432.0
+[2022-06-22 20:26:25,414] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 67108864.0, reducing to 33554432.0
+[2022-06-22 20:26:25,421] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 6
+[2022-06-22 20:26:25,422] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 67108864.0 to 33554432.0
+[2022-06-22 20:26:26,152] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 7[2022-06-22 20:26:26,152] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 7
+
+[2022-06-22 20:26:26,153] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 33554432.0 to 16777216.0
+[2022-06-22 20:26:26,153] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 33554432.0 to 16777216.0
+[2022-06-22 20:26:26,153] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 33554432.0, reducing to 16777216.0
+[2022-06-22 20:26:26,883] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 8
+[2022-06-22 20:26:26,883] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 16777216.0 to 8388608.0
+[2022-06-22 20:26:26,883] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 16777216.0, reducing to 8388608.0
+[2022-06-22 20:26:26,883] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 8
+[2022-06-22 20:26:26,883] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 16777216.0 to 8388608.0
+[2022-06-22 20:26:27,623] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 9
+[2022-06-22 20:26:27,623] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 8388608.0 to 4194304.0
+[2022-06-22 20:26:27,623] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 9
+[2022-06-22 20:26:27,624] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 8388608.0 to 4194304.0
+[2022-06-22 20:26:27,624] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 8388608.0, reducing to 4194304.0
+[2022-06-22 20:26:28,354] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 10
+[2022-06-22 20:26:28,354] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 4194304.0 to 2097152.0
+[2022-06-22 20:26:28,354] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 10
+[2022-06-22 20:26:28,354] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 4194304.0 to 2097152.0
+[2022-06-22 20:26:28,355] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 4194304.0, reducing to 2097152.0
+[2022-06-22 20:26:29,087] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 11
+[2022-06-22 20:26:29,088] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 2097152.0 to 1048576.0
+[2022-06-22 20:26:29,088] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 11
+[2022-06-22 20:26:29,088] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 2097152.0 to 1048576.0
+[2022-06-22 20:26:29,088] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 2097152.0, reducing to 1048576.0
+[2022-06-22 20:26:29,822] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 12
+[2022-06-22 20:26:29,822] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 1048576.0 to 524288.0
+[2022-06-22 20:26:29,822] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 12[2022-06-22 20:26:29,822] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 1048576.0, reducing to 524288.0
+
+[2022-06-22 20:26:29,822] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 1048576.0 to 524288.0
+[2022-06-22 20:26:30,555] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 13
+[2022-06-22 20:26:30,555] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 13
+[2022-06-22 20:26:30,555] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 524288.0 to 262144.0
+[2022-06-22 20:26:30,555] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 524288.0 to 262144.0
+[2022-06-22 20:26:30,555] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 524288.0, reducing to 262144.0
+[2022-06-22 20:26:31,285] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 14
+[2022-06-22 20:26:31,285] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 262144.0 to 131072.0
+[2022-06-22 20:26:31,285] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 14
+[2022-06-22 20:26:31,285] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 262144.0 to 131072.0
+[2022-06-22 20:26:31,285] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 262144.0, reducing to 131072.0
+[2022-06-22 20:26:32,027] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 15
+[2022-06-22 20:26:32,027] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 131072.0 to 65536.0
+[2022-06-22 20:26:32,030] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 15
+[2022-06-22 20:26:32,031] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 131072.0 to 65536.0
+[2022-06-22 20:26:32,031] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 131072.0, reducing to 65536.0
+[2022-06-22 20:26:32,764] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 16[2022-06-22 20:26:32,764] [INFO] [fused_optimizer.py:345:_update_scale] 
+Grad overflow on iteration 16
+
+[2022-06-22 20:26:32,764] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 65536.0 to 32768.0
+[2022-06-22 20:26:32,764] [INFO] [fused_optimizer.py:347:_update_scale] Reducing dynamic loss scale from 65536.0 to 32768.0
+[2022-06-22 20:26:32,765] [INFO] [logging.py:69:log_dist] [Rank 0] Overflow detected. Skipping step. Attempted loss scale: 65536.0, reducing to 32768.0
+[2022-06-22 20:27:38,516] [INFO] [logging.py:69:log_dist] [Rank 0] step=100, skipped=17, lr=[5.466666666666667e-06, 5.466666666666667e-06], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:27:38,529] [INFO] [timer.py:189:stop] 0/100, SamplesPerSec=41.0140480097827, MemAllocated=1.43GB, MaxMemAllocated=4.79GB
+ iteration      100/    1000 | elapsed time per iteration (ms): 785.7 | learning rate 5.533E-06 | lm loss 8.642762E+00 | loss scale 32768.0 |
+after 100 iterations memory (MB) | allocated: 1460.830078125 | max allocated: 4905.9931640625 | cached: 9718.0
+time (ms) | forward: 237.34 | backward: 495.98 | optimizer: 49.89 | batch generator: 5.04 | data loader: 2.55
+[2022-06-22 20:28:57,855] [INFO] [logging.py:69:log_dist] [Rank 0] step=200, skipped=17, lr=[1.2133333333333335e-05, 1.2133333333333335e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:28:57,868] [INFO] [timer.py:189:stop] 0/200, SamplesPerSec=40.75257101997791, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      200/    1000 | elapsed time per iteration (ms): 793.4 | learning rate 1.220E-05 | lm loss 7.162652E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.63 | backward: 496.54 | optimizer: 59.52 | batch generator: 2.53 | data loader: 0.31
+[2022-06-22 20:30:17,109] [INFO] [logging.py:69:log_dist] [Rank 0] step=300, skipped=17, lr=[1.8800000000000003e-05, 1.8800000000000003e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:30:17,121] [INFO] [timer.py:189:stop] 0/300, SamplesPerSec=40.68136567560157, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      300/    1000 | elapsed time per iteration (ms): 792.5 | learning rate 1.887E-05 | lm loss 6.565689E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.80 | backward: 496.80 | optimizer: 58.54 | batch generator: 2.51 | data loader: 0.32
+[2022-06-22 20:31:36,407] [INFO] [logging.py:69:log_dist] [Rank 0] step=400, skipped=17, lr=[2.546666666666667e-05, 2.546666666666667e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:31:36,420] [INFO] [timer.py:189:stop] 0/400, SamplesPerSec=40.64020062224163, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      400/    1000 | elapsed time per iteration (ms): 793.0 | learning rate 2.553E-05 | lm loss 6.053369E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.79 | backward: 496.46 | optimizer: 59.46 | batch generator: 2.50 | data loader: 0.32
+[2022-06-22 20:32:55,697] [INFO] [logging.py:69:log_dist] [Rank 0] step=500, skipped=17, lr=[3.213333333333333e-05, 3.213333333333333e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:32:55,709] [INFO] [timer.py:189:stop] 0/500, SamplesPerSec=40.616123060118504, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      500/    1000 | elapsed time per iteration (ms): 792.9 | learning rate 3.220E-05 | lm loss 5.842836E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.59 | backward: 496.76 | optimizer: 59.13 | batch generator: 2.47 | data loader: 0.30
+[2022-06-22 20:34:14,956] [INFO] [logging.py:69:log_dist] [Rank 0] step=600, skipped=17, lr=[3.88e-05, 3.88e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:34:14,969] [INFO] [timer.py:189:stop] 0/600, SamplesPerSec=40.602604794788434, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      600/    1000 | elapsed time per iteration (ms): 792.6 | learning rate 3.887E-05 | lm loss 5.760731E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.55 | backward: 496.26 | optimizer: 59.29 | batch generator: 2.46 | data loader: 0.30
+[2022-06-22 20:35:34,284] [INFO] [logging.py:69:log_dist] [Rank 0] step=700, skipped=17, lr=[4.546666666666666e-05, 4.546666666666666e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:35:34,296] [INFO] [timer.py:189:stop] 0/700, SamplesPerSec=40.588193103311454, MemAllocated=1.43GB, MaxMemAllocated=4.8GB
+ iteration      700/    1000 | elapsed time per iteration (ms): 793.3 | learning rate 4.553E-05 | lm loss 5.732540E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.68 | backward: 496.99 | optimizer: 59.14 | batch generator: 2.49 | data loader: 0.32
+[2022-06-22 20:36:53,667] [INFO] [logging.py:69:log_dist] [Rank 0] step=800, skipped=17, lr=[5.213333333333334e-05, 5.213333333333334e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:36:53,680] [INFO] [timer.py:189:stop] 0/800, SamplesPerSec=40.57408167028174, MemAllocated=1.43GB, MaxMemAllocated=4.84GB
+ iteration      800/    1000 | elapsed time per iteration (ms): 793.8 | learning rate 5.220E-05 | lm loss 5.678425E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.82 | backward: 496.76 | optimizer: 59.74 | batch generator: 2.52 | data loader: 0.32
+[2022-06-22 20:38:12,885] [INFO] [logging.py:69:log_dist] [Rank 0] step=900, skipped=17, lr=[5.88e-05, 5.88e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:38:12,897] [INFO] [timer.py:189:stop] 0/900, SamplesPerSec=40.572651727761354, MemAllocated=1.43GB, MaxMemAllocated=4.84GB
+ iteration      900/    1000 | elapsed time per iteration (ms): 792.2 | learning rate 5.887E-05 | lm loss 5.612466E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.41 | backward: 496.44 | optimizer: 59.04 | batch generator: 2.53 | data loader: 0.31
+[2022-06-22 20:39:32,223] [INFO] [logging.py:69:log_dist] [Rank 0] step=1000, skipped=17, lr=[6.546666666666667e-05, 6.546666666666667e-05], mom=[[0.9, 0.98], [0.9, 0.98]]
+[2022-06-22 20:39:32,236] [INFO] [timer.py:189:stop] 0/1000, SamplesPerSec=40.5651320146182, MemAllocated=1.43GB, MaxMemAllocated=4.84GB
+ iteration     1000/    1000 | elapsed time per iteration (ms): 793.4 | learning rate 6.553E-05 | lm loss 5.573340E+00 | loss scale 32768.0 |
+time (ms) | forward: 234.86 | backward: 496.38 | optimizer: 59.86 | batch generator: 2.50 | data loader: 0.31
+----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+ validation loss at iteration 1000 | LM loss: 5.561975E+00 | LM PPL: 2.603365E+02 | BERT loss: 5.561975E+00
+------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------
+ validation loss at the end of training for val data | LM loss: 5.543300E+00 | LM PPL: 2.555197E+02 | BERT loss: 5.543300E+00
+------------------------------------------------------------------------------------------------------------------------------
+[2022-06-22 20:40:09,622] [INFO] [logging.py:69:log_dist] [Rank 0] Saving model checkpoint: ./checkpoints/blocklm-blank06-22-20-25/1000/mp_rank_00_model_states.pt
+Evaluating iter 100/100
+----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+ validation loss at the end of training for test data | LM loss: 5.498506E+00 | LM PPL: 2.443268E+02 | BERT loss: 5.498506E+00
+-------------------------------------------------------------------------------------------------------------------------------
+[2022-06-22 20:40:42,639] [INFO] [launch.py:210:main] Process 111655 exits successfully.
+[2022-06-22 20:40:42,639] [INFO] [launch.py:210:main] Process 111654 exits successfully.

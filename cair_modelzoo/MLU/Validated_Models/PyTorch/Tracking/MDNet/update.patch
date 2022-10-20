@@ -1,0 +1,162 @@
+diff --git a/modules/utils.py b/modules/utils.py
+index 4cfb38b..0606d01 100644
+--- a/modules/utils.py
++++ b/modules/utils.py
+@@ -1,6 +1,8 @@
+-from scipy.misc import imresize
++# from scipy.misc import imresize
+ import numpy as np
+ import cv2
++from PIL import Image
++
+ 
+ 
+ def overlap_ratio(rect1, rect2):
+@@ -128,6 +130,7 @@ def crop_image(img, bbox, img_size=107, padding=16, valid=False):
+         cropped = 128 * np.ones((max_y - min_y, max_x - min_x, 3), dtype='uint8')
+         cropped[min_y_val - min_y:max_y_val - min_y, min_x_val - min_x:max_x_val - min_x, :] \
+             = img[min_y_val:max_y_val, min_x_val:max_x_val, :]
+-
+-    scaled = imresize(cropped, (img_size, img_size))
++    
++    # scaled = imresize(cropped, (img_size, img_size))
++    scaled = np.array(Image.fromarray(cropped).resize((img_size, img_size)))
+     return scaled
+diff --git a/pretrain/prepro_imagenet.py b/pretrain/prepro_imagenet.py
+index fef249f..2607115 100644
+--- a/pretrain/prepro_imagenet.py
++++ b/pretrain/prepro_imagenet.py
+@@ -5,21 +5,26 @@ from collections import OrderedDict
+ 
+ import xml.etree.ElementTree
+ import xmltodict
++import argparse
+ 
+-seq_home = 'datasets/ILSVRC/'
+-output_path = 'pretrain/data/imagenet_vid.pkl'
++parser = argparse.ArgumentParser()
++parser.add_argument('--seq_home', type=str, default='datasets/ILSVRC/')
++parser.add_argument('--output_path', type=str, default='pretrain/data/imagenet_vid.pkl')
++args = parser.parse_args()
+ 
+-train_list = [p for p in os.listdir(seq_home + 'Data/VID/train')]
++train_list = [p for p in os.listdir(args.seq_home + 'Data/VID/train')]
+ seq_list = []
+ for num, cur_dir in enumerate(train_list):
+-    seq_list += [os.path.join(cur_dir, p) for p in os.listdir(seq_home + 'Data/VID/train/' + cur_dir)]
++    seq_list += [os.path.join(cur_dir, p) for p in os.listdir(args.seq_home + 'Data/VID/train/' + cur_dir)]
+ 
+ data = {}
+ completeNum = 0
+ for i, seqname in enumerate(seq_list):
+     print('{}/{}: {}'.format(i, len(seq_list), seqname))
+-    seq_path = seq_home + 'Data/VID/train/' + seqname
+-    gt_path = seq_home +'Annotations/VID/train/' + seqname
++    # seq_path = args.seq_home + '/Data/VID/train/' + seqname
++    # gt_path = args.seq_home +'/Annotations/VID/train/' + seqname
++    seq_path = 'Data/VID/train/' + seqname
++    gt_path = 'Annotations/VID/train/' + seqname
+     img_list = sorted([p for p in os.listdir(seq_path) if os.path.splitext(p)[1] == '.JPEG'])
+ 
+     enable_gt = []
+@@ -72,9 +77,9 @@ for i, seqname in enumerate(seq_list):
+         print('Complete!')
+ 
+ # Save db
+-output_dir = os.path.dirname(output_path)
++output_dir = os.path.dirname(args.output_path)
+ os.makedirs(output_dir, exist_ok=True)
+-with open(output_path, 'wb') as fp:
++with open(args.output_path, 'wb') as fp:
+     pickle.dump(data, fp, -1)
+ 
+ print('complete {} videos'.format(completeNum))
+diff --git a/pretrain/train_mdnet.py b/pretrain/train_mdnet.py
+index a6728fc..fec447e 100644
+--- a/pretrain/train_mdnet.py
++++ b/pretrain/train_mdnet.py
+@@ -12,7 +12,7 @@ from data_prov import RegionDataset
+ from modules.model import MDNet, set_optimizer, BCELoss, Precision
+ 
+ 
+-def train_mdnet(opts):
++def train_mdnet(opts, args):
+ 
+     # Init dataset
+     with open(opts['data_path'], 'rb') as fp:
+@@ -20,6 +20,8 @@ def train_mdnet(opts):
+     K = len(data)
+     dataset = [None] * K
+     for k, seq in enumerate(data.values()):
++        dataset_path = os.path.split(opts["data_path"])[0]
++        seq['images'] = [dataset_path + data for data in seq['images']]
+         dataset[k] = RegionDataset(seq['images'], seq['gt'], opts)
+ 
+     # Init model
+@@ -33,6 +35,8 @@ def train_mdnet(opts):
+     evaluator = Precision()
+     optimizer = set_optimizer(model, opts['lr'], opts['lr_mult'])
+ 
++    # speed cal 
++    speed_total = []
+     # Main trainig loop
+     for i in range(opts['n_cycles']):
+         print('==== Start Cycle {:d}/{:d} ===='.format(i + 1, opts['n_cycles']))
+@@ -47,12 +51,14 @@ def train_mdnet(opts):
+         prec = np.zeros(K)
+         k_list = np.random.permutation(K)
+         for j, k in enumerate(k_list):
+-            tic = time.time()
++            # tic = time.time()
+             # training
+             pos_regions, neg_regions = dataset[k].next()
+             if opts['use_gpu']:
+                 pos_regions = pos_regions.cuda()
+                 neg_regions = neg_regions.cuda()
++
++            tic = time.time()
+             pos_score = model(pos_regions, k)
+             neg_score = model(neg_regions, k)
+ 
+@@ -68,11 +74,17 @@ def train_mdnet(opts):
+                 optimizer.step()
+ 
+             prec[k] = evaluator(pos_score, neg_score)
+-
+             toc = time.time()-tic
+-            print('Cycle {:2d}/{:2d}, Iter {:2d}/{:2d} (Domain {:2d}), Loss {:.3f}, Precision {:.3f}, Time {:.3f}'
+-                    .format(i, opts['n_cycles'], j, len(k_list), k, loss.item(), prec[k], toc))
+ 
++            # speed cal 
++            speed = int(opts['batch_frames']) / toc
++            speed_total.append(speed)
++            print('Cycle {:2d}/{:2d}, Iter {:2d}/{:2d} (Domain {:2d}), Loss {:.3f}, Precision {:.3f}, Time {:.3f}, Speed {:.3f} {:.3f}'
++                    .format(i, opts['n_cycles'], j, len(k_list), k, loss.item(), prec[k], toc, speed, np.mean(speed_total)))
++            if j+1 == args.iters:
++                break
++        
++        print("Speed Avg. %.2f samples/sec"% np.mean(speed_total))
+         print('Mean Precision: {:.3f}'.format(prec.mean()))
+         print('Save model to {:s}'.format(opts['model_path']))
+         if opts['use_gpu']:
+@@ -86,7 +98,19 @@ def train_mdnet(opts):
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser()
+     parser.add_argument('-d', '--dataset', default='imagenet', help='training dataset {vot, imagenet}')
++    parser.add_argument('-p', '--data_path', type=str, default='', help='')
++    parser.add_argument('-b', '--batch_size', type=int, default=1024, help='')
++    parser.add_argument('-n', '--n_cycles', type=int, default=1, help='')
++    parser.add_argument('-i', '--iters', type=int, default=50, help='')
+     args = parser.parse_args()
+ 
+     opts = yaml.safe_load(open('pretrain/options_{}.yaml'.format(args.dataset), 'r'))
+-    train_mdnet(opts)
++
++    opts["data_path"] = args.data_path
++    opts["batch_frames"] = args.batch_size
++    opts["batch_pos"] = args.batch_size
++    opts["batch_neg"] = args.batch_size
++    opts["batch_accum"] = args.batch_size
++    opts["n_cycles"] = args.n_cycles
++
++    train_mdnet(opts, args)

@@ -1,0 +1,29 @@
+diff --git a/train.py b/train.py
+index 2d74461..850b27b 100755
+--- a/train.py
++++ b/train.py
+@@ -98,8 +98,10 @@ def train():
+         start_iter = args.resume_epoch * epoch_size
+     else:
+         start_iter = 0
+-
++    total_time = 0
+     for iteration in range(start_iter, max_iter):
++        if iteration > 299:
++            break
+         if iteration % epoch_size == 0:
+             # create batch iterator
+             batch_iterator = iter(data.DataLoader(dataset, batch_size, shuffle=True, num_workers=num_workers, collate_fn=detection_collate))
+@@ -128,8 +130,11 @@ def train():
+         optimizer.step()
+         load_t1 = time.time()
+         batch_time = load_t1 - load_t0
++        total_time=total_time+batch_time
++        ave_time=float(total_time/(iteration+1))
+         eta = int(batch_time * (max_iter - iteration))
+-        print('Epoch:{}/{} || Epochiter: {}/{} || Iter: {}/{} || L: {:.4f} C: {:.4f} || LR: {:.8f} || Batchtime: {:.4f} s || ETA: {}'.format(epoch, max_epoch, (iteration % epoch_size) + 1, epoch_size, iteration + 1, max_iter, loss_l.item(), loss_c.item(), lr, batch_time, str(datetime.timedelta(seconds=eta))))
++        print('Epoch:{}/{} || Epochiter: {}/{} || Iter: {}/{} || L: {:.4f} C: {:.4f} || LR: {:.8f} || Batchtime: {:.4f} || ave_time: {:.4f} s || ETA: {}'.format(epoch, max_epoch, (iteration % epoch_size) + 1, epoch_size, iteration + 1, max_iter, loss_l.item(), loss_c.item(), lr, batch_time, ave_time,str(datetime.timedelta(seconds=eta))))
++        #print('Epoch:{}/{} || Epochiter: {}/{} || Iter: {}/{} || L: {:.4f} C: {:.4f} || LR: {:.8f} || Batchtime: {:.4f} s || ETA: {}'.format(epoch, max_epoch, (iteration % epoch_size) + 1, epoch_size, iteration + 1, max_iter, loss_l.item(), loss_c.item(), lr, batch_time, str(datetime.timedelta(seconds=eta))))
+ 
+     torch.save(net.state_dict(), save_folder + 'Final_FaceBoxes.pth')
+ 

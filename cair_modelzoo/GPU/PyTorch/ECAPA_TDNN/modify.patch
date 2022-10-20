@@ -1,0 +1,60 @@
+---
+ modify.patch                                       |  0
+ .../SpeakerRec/hparams/train_ecapa_tdnn.yaml       | 26 ++++++++++++----------
+ .../SpeakerRec/speaker_verification_plda.py        |  4 ++++
+ .../SpeakerRec/train_speaker_embeddings.py         |  7 ++++++
+ recipes/VoxCeleb/voxceleb_prepare.py               |  5 +++++
+ 5 files changed, 30 insertions(+), 12 deletions(-)
+ create mode 100644 modify.patch
+
+diff --git a/recipes/VoxCeleb/SpeakerRec/speaker_verification_plda.py b/recipes/VoxCeleb/SpeakerRec/speaker_verification_plda.py
+index ff1fe44..3d1cf76 100755
+--- a/recipes/VoxCeleb/SpeakerRec/speaker_verification_plda.py
++++ b/recipes/VoxCeleb/SpeakerRec/speaker_verification_plda.py
+@@ -28,6 +28,10 @@ from speechbrain.processing.PLDA_LDA import fast_PLDA_scoring
+ from speechbrain.utils.data_utils import download_file
+ from speechbrain.utils.distributed import run_on_main
+
++ 
++random.seed(80)
++np.random.seed(80)
++os.environ['PYTHONHASHSEED'] = str(80)  # 禁止hash随机化
+
+ # Compute embeddings from the waveforms
+ def compute_embeddings(wavs, wav_lens):
+diff --git a/recipes/VoxCeleb/SpeakerRec/train_speaker_embeddings.py b/recipes/VoxCeleb/SpeakerRec/train_speaker_embeddings.py
+index d9865e4..e3d1e99 100755
+--- a/recipes/VoxCeleb/SpeakerRec/train_speaker_embeddings.py
++++ b/recipes/VoxCeleb/SpeakerRec/train_speaker_embeddings.py
+@@ -24,6 +24,13 @@ from speechbrain.utils.data_utils import download_file
+ from hyperpyyaml import load_hyperpyyaml
+ from speechbrain.utils.distributed import run_on_main
+
++torch.cuda.manual_seed(80)  # 为当前GPU设置随机种子
++torch.cuda.manual_seed_all(80)  # 为所有GPU设置随机种子
++torch.backends.cudnn.enabled = False  #禁用非确定性算法
++torch.backends.benchmark = False
++torch.backends.deterministic = True
++os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8" # CUDA版本≥10.2使用，性能会有一定降低
++
+
+ class SpeakerBrain(sb.core.Brain):
+     """Class for speaker embedding training"
+diff --git a/recipes/VoxCeleb/voxceleb_prepare.py b/recipes/VoxCeleb/voxceleb_prepare.py
+index 1fef734..435ded3 100644
+--- a/recipes/VoxCeleb/voxceleb_prepare.py
++++ b/recipes/VoxCeleb/voxceleb_prepare.py
+@@ -20,6 +20,11 @@ from speechbrain.dataio.dataio import (
+     save_pkl,
+ )
+
++ 
++random.seed(80)
++np.random.seed(80)
++os.environ['PYTHONHASHSEED'] = str(80)  # 禁止hash随机化
++
+ logger = logging.getLogger(__name__)
+ OPT_FILE = "opt_voxceleb_prepare.pkl"
+ TRAIN_CSV = "train.csv"
+-- 
+2.7.4

@@ -1,0 +1,8 @@
+name: "Inspur-NF5468M5"
+cpu: "Intel(R) Xeon(R) Gold 6230R CPU @ 2.10GHz"
+mem: "32GB, 2933 MHz, DDR4"
+mem_num: 12
+pcie: "Gen3"
+link: "MLU Link, x6, 40GB/sec"
+dev: "MLU290-32GB"
+dev_num: 8

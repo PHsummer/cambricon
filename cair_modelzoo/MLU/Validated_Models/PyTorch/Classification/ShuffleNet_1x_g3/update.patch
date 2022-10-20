@@ -1,0 +1,43 @@
+diff --git a/ShuffleNetV1/train.py b/ShuffleNetV1/train.py
+index 3b3f08f..fa7c7f6 100644
+--- a/ShuffleNetV1/train.py
++++ b/ShuffleNetV1/train.py
+@@ -143,7 +143,7 @@ def main():
+     criterion_smooth = CrossEntropyLabelSmooth(1000, 0.1)
+ 
+     if use_gpu:
+-        model = nn.DataParallel(model)
++        model.cuda()
+         loss_function = criterion_smooth.cuda()
+         device = torch.device("cuda")
+     else:
+@@ -180,9 +180,9 @@ def main():
+         exit(0)
+ 
+     while all_iters < args.total_iters:
+-        all_iters = train(model, device, args, val_interval=args.val_interval, bn_process=False, all_iters=all_iters)
++        all_iters = train(model, device, args, val_interval=args.val_interval, bn_process=False, all_iters=all_iters, total_iters=args.total_iters)
+         validate(model, device, args, all_iters=all_iters)
+-    all_iters = train(model, device, args, val_interval=int(1280000/args.batch_size), bn_process=True, all_iters=all_iters)
++    all_iters = train(model, device, args, val_interval=int(1280000/args.batch_size), bn_process=True, all_iters=all_iters, total_iters=args.total_iters)
+     validate(model, device, args, all_iters=all_iters)
+     save_checkpoint({'state_dict': model.state_dict(),}, args.total_iters, tag='bnps-')
+     torch.save(model.state_dict(), 'model.mdl')
+@@ -192,7 +192,7 @@ def adjust_bn_momentum(model, iters):
+         if isinstance(m, nn.BatchNorm2d):
+             m.momentum = 1 / iters
+ 
+-def train(model, device, args, *, val_interval, bn_process=False, all_iters=None):
++def train(model, device, args, *, val_interval, bn_process=False, all_iters=None, total_iters=None):
+ 
+     optimizer = args.optimizer
+     loss_function = args.loss_function
+@@ -203,6 +203,8 @@ def train(model, device, args, *, val_interval, bn_process=False, all_iters=None
+     Top1_err, Top5_err = 0.0, 0.0
+     model.train()
+     for iters in range(1, val_interval + 1):
++        if all_iters > total_iters:
++            exit(0)
+         scheduler.step()
+         if bn_process:
+             adjust_bn_momentum(model, iters)

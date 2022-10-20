@@ -1,0 +1,10 @@
+dist/
+build/
+*.egg-info/
+*/**/__pycache__
+*.swp
+*.pyc
+
+# Visual Studio Code files
+.vscode
+.vs

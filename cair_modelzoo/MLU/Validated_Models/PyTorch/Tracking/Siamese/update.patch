@@ -1,0 +1,77 @@
+diff --git a/loss.png b/loss.png
+old mode 100644
+new mode 100755
+diff --git a/make_dataset.py b/make_dataset.py
+old mode 100644
+new mode 100755
+diff --git a/model.py b/model.py
+old mode 100644
+new mode 100755
+diff --git a/mydataset.py b/mydataset.py
+old mode 100644
+new mode 100755
+diff --git a/readme.md b/readme.md
+old mode 100644
+new mode 100755
+diff --git a/requirements.txt b/requirements.txt
+old mode 100644
+new mode 100755
+diff --git a/train.py b/train.py
+old mode 100644
+new mode 100755
+index 9b34f1e..5ec05c5
+--- a/train.py
++++ b/train.py
+@@ -34,6 +34,7 @@ if __name__ == '__main__':
+     gflags.DEFINE_integer("max_iter", 50000, "number of iterations before stopping")
+     gflags.DEFINE_string("model_path", "/home/data/pin/model/siamese", "path to store model")
+     gflags.DEFINE_string("gpu_ids", "0,1,2,3", "gpu ids used to train")
++    gflags.DEFINE_string("gpu_nums", "1", "gpu nums used to train")
+ 
+     Flags(sys.argv)
+ 
+@@ -46,6 +47,8 @@ if __name__ == '__main__':
+     # train_dataset = dset.ImageFolder(root=Flags.train_path)
+     # test_dataset = dset.ImageFolder(root=Flags.test_path)
+ 
++    Flags.gpu_ids = ",".join([str(i) for i in range(int(Flags.gpu_nums))])
++    print(Flags.gpu_ids)
+ 
+     os.environ["CUDA_VISIBLE_DEVICES"] = Flags.gpu_ids
+     print("use gpu:", Flags.gpu_ids, "to train.")
+@@ -76,7 +79,10 @@ if __name__ == '__main__':
+     time_start = time.time()
+     queue = deque(maxlen=20)
+ 
++    # speed cal
++    speed_total = []
+     for batch_id, (img1, img2, label) in enumerate(trainLoader, 1):
++        srt = time.time()
+         if batch_id > Flags.max_iter:
+             break
+         if Flags.cuda:
+@@ -89,8 +95,13 @@ if __name__ == '__main__':
+         loss_val += loss.item()
+         loss.backward()
+         optimizer.step()
++
++        # speed cal
++        end = time.time()
++        speed = Flags.batch_size / (end-srt)
++        speed_total.append(speed)
+         if batch_id % Flags.show_every == 0 :
+-            print('[%d]\tloss:\t%.5f\ttime lapsed:\t%.2f s'%(batch_id, loss_val/Flags.show_every, time.time() - time_start))
++            print('[%d]\tloss:\t%.5f\ttime lapsed:\t%.2f s\tspeed: %.2f samples/sec'%(batch_id, loss_val/Flags.show_every, time.time() - time_start, speed))
+             loss_val = 0
+             time_start = time.time()
+         if batch_id % Flags.save_every == 0:
+@@ -112,7 +123,8 @@ if __name__ == '__main__':
+             queue.append(right*1.0/(right+error))
+         train_loss.append(loss_val)
+     #  learning_rate = learning_rate * 0.95
+-
++    
++    print("Speed Avg. %.2f samples/sec"% np.mean(speed_total))
+     with open('train_loss', 'wb') as f:
+         pickle.dump(train_loss, f)
+ 

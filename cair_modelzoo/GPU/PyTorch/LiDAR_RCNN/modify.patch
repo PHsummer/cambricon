@@ -1,0 +1,266 @@
+diff --git a/config/lidar_rcnn.yaml b/config/lidar_rcnn.yaml
+index 2f0c669..1e45d4c 100644
+--- a/config/lidar_rcnn.yaml
++++ b/config/lidar_rcnn.yaml
+@@ -1,8 +1,4 @@
+-CUDNN:
+-  BENCHMARK: true
+-  DETERMINISTIC: false
+-  ENABLED: true
+-nGPUS: 4
++nGPUS: 8
+ OUTPUT_DIR: 'outputs'
+ LOG_DIR: 'log'
+ WORKERS: 8
+@@ -24,7 +20,7 @@ TRAIN:
+   RESUME: False
+   PRETRAIN: False
+   MODEL_PATH: ''
+-  DATA_PATH: './datasets/mmdet3d_pp'
++  DATA_PATH: '/data/mmdet3d_pp'
+   OPTIMIZER: sgd
+   LR: 0.02
+   WD: 0.0005
+diff --git a/config/lidar_rcnn_2x.yaml b/config/lidar_rcnn_2x.yaml
+index 81c94a4..817d0ea 100644
+--- a/config/lidar_rcnn_2x.yaml
++++ b/config/lidar_rcnn_2x.yaml
+@@ -1,8 +1,4 @@
+-CUDNN:
+-  BENCHMARK: true
+-  DETERMINISTIC: false
+-  ENABLED: true
+-nGPUS: 4
++nGPUS: 1
+ OUTPUT_DIR: 'outputs'
+ LOG_DIR: 'log'
+ WORKERS: 8
+@@ -14,7 +10,7 @@ MODEL:
+   REG_NUM: 7
+   CLS_NUM: 2
+   PTS_DIM: 9
+-  X: 2
++  X: 1
+ 
+ TRAIN:
+   NUM_POINTS: 512
+@@ -24,7 +20,7 @@ TRAIN:
+   RESUME: False
+   PRETRAIN: False
+   MODEL_PATH: ''
+-  DATA_PATH: './datasets/mmdet3d_pp'
++  DATA_PATH: '/data/mmdet3d_pp'
+   OPTIMIZER: sgd
+   LR: 0.02
+   WD: 0.0005
+diff --git a/config/lidar_rcnn_all_cls.yaml b/config/lidar_rcnn_all_cls.yaml
+index c95a262..a738d37 100644
+--- a/config/lidar_rcnn_all_cls.yaml
++++ b/config/lidar_rcnn_all_cls.yaml
+@@ -1,7 +1,3 @@
+-CUDNN:
+-  BENCHMARK: true
+-  DETERMINISTIC: false
+-  ENABLED: true
+ nGPUS: 8
+ OUTPUT_DIR: 'outputs'
+ LOG_DIR: 'log'
+@@ -12,7 +8,7 @@ DATASET: 'waymo.loader'
+ MODEL:
+   NAME: 'PointNet'
+   REG_NUM: 7
+-  CLS_NUM: 5
++  CLS_NUM: 2
+   PTS_DIM: 9
+   X: 1
+ 
+@@ -20,11 +16,11 @@ TRAIN:
+   NUM_POINTS: 512
+   BATCH_SIZE_PER_GPU: 256
+   BEGIN_EPOCH: 0
+-  END_EPOCH: 60
++  END_EPOCH: 1
+   RESUME: False
+   PRETRAIN: False
+   MODEL_PATH: ''
+-  DATA_PATH: './datasets/mmdet3d_pp_3class' 
++  DATA_PATH: '/data/mmdet3d_pp'
+   OPTIMIZER: sgd
+   LR: 0.02
+   WD: 0.0005
+@@ -33,7 +29,7 @@ TRAIN:
+   LOSS_WEIGHT: 20
+   SUFFLE_SIZE: 16384
+   IOU_THRESHOLD: [1, 0.7, 0.5, 1, 0.5]
+-  VALID_CLS: [0, 1, 2, 3, 4]
++  VALID_CLS: [0, 1]
+ TEST:
+   WORKERS: 2
+   NUM_POINTS: 512
+diff --git a/config/lidar_rcnn_all_cls_2x.yaml b/config/lidar_rcnn_all_cls_2x.yaml
+index 0150da7..6c3bd90 100644
+--- a/config/lidar_rcnn_all_cls_2x.yaml
++++ b/config/lidar_rcnn_all_cls_2x.yaml
+@@ -1,8 +1,4 @@
+-CUDNN:
+-  BENCHMARK: true
+-  DETERMINISTIC: false
+-  ENABLED: true
+-nGPUS: 8
++nGPUS: 1
+ OUTPUT_DIR: 'outputs'
+ LOG_DIR: 'log'
+ WORKERS: 8
+@@ -12,19 +8,19 @@ DATASET: 'waymo.loader'
+ MODEL:
+   NAME: 'PointNet'
+   REG_NUM: 7
+-  CLS_NUM: 5
++  CLS_NUM: 2
+   PTS_DIM: 9
+-  X: 2
++  X: 1
+ 
+ TRAIN:
+   NUM_POINTS: 512
+   BATCH_SIZE_PER_GPU: 256
+   BEGIN_EPOCH: 0
+-  END_EPOCH: 60
++  END_EPOCH: 1
+   RESUME: False
+   PRETRAIN: False
+   MODEL_PATH: ''
+-  DATA_PATH: './datasets/mmdet3d_pp_3class'
++  DATA_PATH: '/data/mmdet3d_pp'
+   OPTIMIZER: sgd
+   LR: 0.02
+   WD: 0.0005
+@@ -33,7 +29,7 @@ TRAIN:
+   LOSS_WEIGHT: 20
+   SUFFLE_SIZE: 16384
+   IOU_THRESHOLD: [1, 0.7, 0.5, 1, 0.5]
+-  VALID_CLS: [0, 1, 2, 3, 4]
++  VALID_CLS: [0, 1]
+ TEST:
+   WORKERS: 2
+   NUM_POINTS: 512
+diff --git a/src/LiDAR_RCNN/core/function.py b/src/LiDAR_RCNN/core/function.py
+index 6e3411c..a320bc1 100644
+--- a/src/LiDAR_RCNN/core/function.py
++++ b/src/LiDAR_RCNN/core/function.py
+@@ -88,10 +88,10 @@ def train(cfg, epoch, num_epoch, epoch_iters, base_lr, num_iters, trainloader,
+             torch.cuda.empty_cache()
+ 
+         if i_iter % cfg.PRINT_FREQ == 0 and rank == 0:
+-            msg = 'Epoch: [{}/{}] Iter:[{}/{}], Time: {:.2f}, ' \
++            msg = 'Epoch: [{}/{}] Iter:[{}/{}], Time: {:.2f}, fps: {:.2f}, ' \
+                   'lr: {:.6f}, Loss: {:.6f}, cls_loss: {:.6f}, center_loss: {:.6f}, size_loss: {:.6f},   heading_loss: {:.6f}' .format(
+                       epoch, num_epoch, i_iter, epoch_iters,
+-                      batch_time / cfg.PRINT_FREQ, lr, ave_loss.average() / world_size, ave_cls_loss.average() / world_size, ave_center_loss.average() / world_size, ave_size_loss.average() / world_size, ave_heading_loss.average() / world_size)
++                      batch_time / cfg.PRINT_FREQ, cfg.nGPUS * cfg.TRAIN.BATCH_SIZE_PER_GPU * cfg.PRINT_FREQ / batch_time ,lr, ave_loss.average() / world_size, ave_cls_loss.average() / world_size, ave_center_loss.average() / world_size, ave_size_loss.average() / world_size, ave_heading_loss.average() / world_size)
+             logging.info(msg)
+             batch_time = 0
+     writer.add_scalar('train_loss', ave_loss.average(), global_steps)
+diff --git a/tools/test.py b/tools/test.py
+index 6395216..79239c2 100644
+--- a/tools/test.py
++++ b/tools/test.py
+@@ -36,11 +36,30 @@ parser.add_argument("--checkpoint", type=str, default='')
+ args = parser.parse_args()
+ cfg = edict(yaml.load(open(args.cfg, 'r')))
+ 
+-# cudnn related setting
+-cudnn.benchmark = cfg.CUDNN.BENCHMARK
+-cudnn.deterministic = cfg.CUDNN.DETERMINISTIC
+-cudnn.enabled = cfg.CUDNN.ENABLED
+-distributed = cfg.nGPUS > 1
++# 1.固定Random Seed
++SEED = 0
++random.seed(SEED)
++np.random.seed(SEED)
++os.environ['PYTHONHASHSEED'] = str(SEED)  # 禁止hash随机化
++torch.manual_seed(SEED)
++torch.cuda.manual_seed(SEED)  # 为当前GPU设置随机种子
++torch.cuda.manual_seed_all(SEED)
++torch.backends.cudnn.enabled = False  #禁用非确定性算法
++torch.backends.cudnn.benchmark = False
++torch.backends.cudnn.deterministic = True   # 固定卷积算子
++torch.use_deterministic_algorithms(True)  # 固定所有算子
++os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
++
++# 2.固定DataLoader Seed
++g = torch.Generator()
++g.manual_seed(SEED)
++
++def seed_worker(worker_id):
++    worker_seed = torch.initial_seed() % 2**32
++    np.random.seed(worker_seed)
++    random.seed(worker_seed)
++
++distributed = 1
+ device = torch.device('cuda:{}'.format(args.local_rank))
+ if distributed:
+     torch.cuda.set_device(args.local_rank)
+@@ -80,7 +99,10 @@ valloader = torch.utils.data.DataLoader(val_dataset,
+                                         num_workers=cfg.TEST.WORKERS,
+                                         pin_memory=True,
+                                         drop_last=False,
+-                                        sampler=None)
++                                        sampler=None,
++                                        worker_init_fn=seed_worker,
++                                        generator=g)
++
+ 
+ model = model.to(device)
+ model = nn.parallel.DistributedDataParallel(model,
+diff --git a/tools/train.py b/tools/train.py
+index 45c6ba5..ac2a50e 100644
+--- a/tools/train.py
++++ b/tools/train.py
+@@ -47,11 +47,30 @@ writer_dict = {
+ 'valid_global_steps': 0,
+ }
+ 
+-# cudnn related setting
+-cudnn.benchmark = cfg.CUDNN.BENCHMARK
+-cudnn.deterministic = cfg.CUDNN.DETERMINISTIC
+-cudnn.enabled = cfg.CUDNN.ENABLED
+-distributed = cfg.nGPUS > 1
++# 1.固定Random Seed
++SEED = 0
++random.seed(SEED)
++np.random.seed(SEED)
++os.environ['PYTHONHASHSEED'] = str(SEED)  # 禁止hash随机化
++torch.manual_seed(SEED)
++torch.cuda.manual_seed(SEED)  # 为当前GPU设置随机种子
++torch.cuda.manual_seed_all(SEED)
++torch.backends.cudnn.enabled = False  #禁用非确定性算法
++torch.backends.cudnn.benchmark = False
++torch.backends.cudnn.deterministic = True   # 固定卷积算子
++torch.use_deterministic_algorithms(True)  # 固定所有算子
++os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
++
++# 2.固定DataLoader Seed
++g = torch.Generator()
++g.manual_seed(SEED)
++
++def seed_worker(worker_id):
++    worker_seed = torch.initial_seed() % 2**32
++    np.random.seed(worker_seed)
++    random.seed(worker_seed)
++
++distributed = 1
+ device = torch.device('cuda:{}'.format(args.local_rank))
+ 
+ if distributed:
+@@ -73,7 +92,9 @@ trainloader = torch.utils.data.DataLoader(
+         num_workers=cfg.WORKERS,
+         pin_memory=True,
+         drop_last=True,
+-        sampler=None)
++        sampler=None,
++        worker_init_fn=seed_worker,
++        generator=g)
+ 
+ model = eval(cfg.MODEL.NAME)(cfg.MODEL.PTS_DIM, cfg.MODEL.X, cfg.MODEL.CLS_NUM)
+ model.init_weights()

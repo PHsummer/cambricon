@@ -1,0 +1,150 @@
+diff --git a/models/pvanet.py b/models/pvanet.py
+index 1696e1e..3df31d5 100644
+--- a/models/pvanet.py
++++ b/models/pvanet.py
+@@ -43,7 +43,7 @@ class mCReLU_base(nn.Module):
+         self.act = F.relu
+ 
+         # Trainable params
+-        self.conv3x3 = nn.Conv2d(n_in, n_out, kernelsize, stride=stride, padding=kernelsize/2)
++        self.conv3x3 = nn.Conv2d(n_in, n_out, kernelsize, stride=stride, padding=kernelsize//2)
+         self.bn = nn.BatchNorm2d(n_out * 2)
+ 
+     def forward(self, x):
+@@ -74,7 +74,7 @@ class mCReLU_residual(nn.Module):
+ 
+         # Trainable params
+         self.reduce = nn.Conv2d(n_in, n_red, 1, stride=in_stride)
+-        self.conv3x3 = nn.Conv2d(n_red, n_3x3, kernelsize, padding=kernelsize/2)
++        self.conv3x3 = nn.Conv2d(n_red, n_3x3, kernelsize, padding=kernelsize//2)
+         self.bn = nn.BatchNorm2d(n_3x3 * 2)
+         self.expand = nn.Conv2d(n_3x3 * 2, n_out, 1)
+ 
+@@ -232,7 +232,7 @@ class Inception(nn.Module):
+             x = self.act(x)
+ 
+         if (x_sc.get_device() != x.get_device()):
+-            print "Something's wrong"
++            print("Something's wrong")
+ 
+         # Projection
+         if self.proj:
+@@ -339,7 +339,7 @@ class PVANet(nn.Module):
+         self.features = PVANetFeat()
+ 
+         assert (inputsize % 32 == 0)
+-        featsize = inputsize / 32
++        featsize = inputsize // 32
+ 
+         self.classifier = nn.Sequential(
+             nn.Linear(384 * featsize * featsize, 4096),
+@@ -362,7 +362,7 @@ class PVANet(nn.Module):
+     def forward(self, x):
+         x = self.features(x)
+ 
+-        x = x.view(x.size(0), -1)  # Reshape into (batchsize, all)
++        x = x.reshape(x.size(0), -1)  # Reshape into (batchsize, all)
+ 
+         x = self.classifier(x)
+ 
+diff --git a/train_imagenet.py b/train_imagenet.py
+index 2ada765..4455ed0 100644
+--- a/train_imagenet.py
++++ b/train_imagenet.py
+@@ -65,7 +65,7 @@ def main():
+     global args, best_prec1
+     args = parser.parse_args()
+ 
+-    print args
++    print(args)
+ 
+     # create model
+     if args.pretrained:
+@@ -77,10 +77,10 @@ def main():
+ 
+     if args.arch.startswith('alexnet') or args.arch.startswith('vgg') or args.arch in ['pvanet']:
+         # Even if only one gpu is used, create a DataParallel instance (consistency)
+-        model.features = torch.nn.DataParallel(model.features, device_ids=[0] if args.single_gpu else None)
++        model.features.cuda()
+         model.cuda()
+     else:
+-        model = torch.nn.DataParallel(model, device_ids=[0] if args.single_gpu else None).cuda()
++        model.cuda()
+ 
+     # define loss function (criterion) and optimizer
+     criterion = nn.CrossEntropyLoss().cuda()
+@@ -170,28 +170,28 @@ def train(train_loader, model, criterion, optimizer, epoch):
+     for i, (input, target) in enumerate(train_loader):
+         # Initial warming-up
+         if epoch == 0 and i == 0:
+-            print "Temporarily lowered LR"
++            print("Temporarily lowered LR")
+             adjust_learning_rate(optimizer, 120)
+         if epoch == 0 and i == 1000:
+-            print "Recover LR"
++            print("Recover LR")
+             adjust_learning_rate(optimizer, 0)
+ 
+         # measure data loading time
+         data_time.update(time.time() - end)
+ 
+-        target = target.cuda(async=True)
++        target = target.cuda(non_blocking=True)
+         input_var = torch.autograd.Variable(input)
+         target_var = torch.autograd.Variable(target)
+ 
+         # compute output
+-        output = model(input_var)
++        output = model(input_var.cuda())
+         loss = criterion(output, target_var)
+ 
+         # measure accuracy and record loss
+         prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
+-        losses.update(loss.data[0], input.size(0))
+-        top1.update(prec1[0], input.size(0))
+-        top5.update(prec5[0], input.size(0))
++        losses.update(loss.item(), input.size(0))
++        top1.update(prec1.item(), input.size(0))
++        top5.update(prec5.item(), input.size(0))
+ 
+         # compute gradient and do SGD step
+         optimizer.zero_grad()
+@@ -228,19 +228,19 @@ def validate(val_loader, model, criterion, multiple_crops=False):
+ 
+     end = time.time()
+     for i, (input, target) in enumerate(val_loader):
+-        target = target.cuda(async=True)
++        target = target.cuda(non_blocking=True)
+         input_var = torch.autograd.Variable(input, volatile=True)
+         target_var = torch.autograd.Variable(target, volatile=True)
+ 
+         # compute output
+-        output = model(input_var)
++        output = model(input_var.cuda())
+         loss = criterion(output, target_var)
+ 
+         # measure accuracy and record loss
+         prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
+-        losses.update(loss.data[0], input.size(0))
+-        top1.update(prec1[0], input.size(0))
+-        top5.update(prec5[0], input.size(0))
++        losses.update(loss.item(), input.size(0))
++        top1.update(prec1.item(), input.size(0))
++        top5.update(prec5.item(), input.size(0))
+ 
+         # measure elapsed time
+         batch_time.update(time.time() - end)
+@@ -299,11 +299,11 @@ def accuracy(output, target, topk=(1,)):
+ 
+     _, pred = output.topk(maxk, 1, True, True)
+     pred = pred.t()
+-    correct = pred.eq(target.view(1, -1).expand_as(pred))
++    correct = pred.eq(target.reshape(1, -1).expand_as(pred))
+ 
+     res = []
+     for k in topk:
+-        correct_k = correct[:k].view(-1).float().sum(0)
++        correct_k = correct[:k].reshape(-1).float().sum(0)
+         res.append(correct_k.mul_(100.0 / batch_size))
+     return res
+ 
