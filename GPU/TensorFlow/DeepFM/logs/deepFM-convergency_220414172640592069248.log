@@ -1,0 +1,461 @@
+2022-04-14 09:26:54.288966: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+WARNING:tensorflow:Deprecation warnings have been disabled. Set TF_ENABLE_DEPRECATION_WARNINGS=1 to re-enable them.
+WARNING:tensorflow:TensorFlow will not use sklearn by default. This improves performance in some cases. To enable sklearn export the environment variable  TF_ALLOW_IOLIBS=1.
+WARNING:tensorflow:TensorFlow will not use Dask by default. This improves performance in some cases. To enable Dask export the environment variable  TF_ALLOW_IOLIBS=1.
+WARNING:tensorflow:TensorFlow will not use Pandas by default. This improves performance in some cases. To enable Pandas export the environment variable  TF_ALLOW_IOLIBS=1.
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/yellowfin.py:27: The name tf.train.Optimizer is deprecated. Please use tf.compat.v1.train.Optimizer instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:68: The name tf.set_random_seed is deprecated. Please use tf.compat.v1.set_random_seed instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:70: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:184: The name tf.random_normal is deprecated. Please use tf.random.normal instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:187: The name tf.random_uniform is deprecated. Please use tf.random.uniform instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:127: The name tf.losses.log_loss is deprecated. Please use tf.compat.v1.losses.log_loss instead.
+
+WARNING:tensorflow:
+The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+  * https://github.com/tensorflow/io (for I/O related ops)
+If you depend on functionality not listed there, please file an issue.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:141: The name tf.train.AdamOptimizer is deprecated. Please use tf.compat.v1.train.AdamOptimizer instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:156: The name tf.train.Saver is deprecated. Please use tf.compat.v1.train.Saver instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:157: The name tf.global_variables_initializer is deprecated. Please use tf.compat.v1.global_variables_initializer instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:174: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.
+
+WARNING:tensorflow:From /workspace/tensorflow-DeepFM/example/../DeepFM.py:176: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.
+
+2022-04-14 09:27:47.839271: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2022-04-14 09:27:47.842729: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0xc07d920 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-04-14 09:27:47.842778: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-04-14 09:27:47.845503: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-04-14 09:27:47.964773: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0xc0ed4e0 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2022-04-14 09:27:47.964829: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla V100-SXM2-16GB, Compute Capability 7.0
+2022-04-14 09:27:47.965403: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:27:47.965475: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:27:47.970731: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:27:47.997887: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:27:47.998284: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:27:47.999406: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:27:48.001489: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:27:48.001709: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:27:48.002393: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:27:48.002429: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:27:48.402481: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:27:48.402548: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:27:48.402564: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:27:48.403491: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13483
+2022-04-14 09:27:48.808889: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:27:49.549752: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+[1] train-result=0.1123, valid-result=0.1667 [10.3 s]
+[2] train-result=0.2485, valid-result=0.2471 [8.5 s]
+[3] train-result=0.2523, valid-result=0.2439 [8.5 s]
+[4] train-result=0.2655, valid-result=0.2524 [11.8 s]
+[5] train-result=0.2710, valid-result=0.2562 [8.9 s]
+[6] train-result=0.2739, valid-result=0.2585 [8.9 s]
+[7] train-result=0.2761, valid-result=0.2595 [9.0 s]
+[8] train-result=0.2779, valid-result=0.2613 [8.9 s]
+[9] train-result=0.2791, valid-result=0.2625 [9.7 s]
+[10] train-result=0.2802, valid-result=0.2635 [11.6 s]
+[11] train-result=0.2808, valid-result=0.2633 [9.3 s]
+[12] train-result=0.2813, valid-result=0.2641 [8.7 s]
+[13] train-result=0.2818, valid-result=0.2647 [9.0 s]
+[14] train-result=0.2823, valid-result=0.2643 [9.7 s]
+[15] train-result=0.2826, valid-result=0.2655 [9.8 s]
+[16] train-result=0.2829, valid-result=0.2652 [12.3 s]
+[17] train-result=0.2827, valid-result=0.2656 [8.9 s]
+[18] train-result=0.2831, valid-result=0.2654 [8.5 s]
+[19] train-result=0.2830, valid-result=0.2656 [8.4 s]
+[20] train-result=0.2832, valid-result=0.2651 [8.4 s]
+[21] train-result=0.2834, valid-result=0.2655 [10.5 s]
+[22] train-result=0.2834, valid-result=0.2655 [8.2 s]
+[23] train-result=0.2834, valid-result=0.2654 [8.3 s]
+[24] train-result=0.2834, valid-result=0.2661 [8.3 s]
+[25] train-result=0.2835, valid-result=0.2647 [8.3 s]
+[26] train-result=0.2838, valid-result=0.2659 [8.5 s]
+[27] train-result=0.2838, valid-result=0.2659 [10.0 s]
+[28] train-result=0.2840, valid-result=0.2660 [8.8 s]
+[29] train-result=0.2840, valid-result=0.2659 [8.5 s]
+[30] train-result=0.2839, valid-result=0.2657 [8.6 s]
+2022-04-14 09:32:33.044797: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:32:33.044885: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:32:33.044964: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:32:33.044985: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:32:33.045033: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:32:33.045052: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:32:33.045096: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:32:33.045112: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:32:33.045728: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:32:33.045779: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:32:33.045796: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:32:33.045819: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:32:33.047057: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13483
+[1] train-result=-0.0517, valid-result=0.0020 [13.6 s]
+[2] train-result=0.2112, valid-result=0.2393 [9.7 s]
+[3] train-result=0.2582, valid-result=0.2463 [9.3 s]
+[4] train-result=0.2639, valid-result=0.2515 [9.3 s]
+[5] train-result=0.2657, valid-result=0.2546 [10.5 s]
+[6] train-result=0.2680, valid-result=0.2603 [10.8 s]
+[7] train-result=0.2732, valid-result=0.2644 [8.3 s]
+[8] train-result=0.2645, valid-result=0.2581 [8.4 s]
+[9] train-result=0.2699, valid-result=0.2616 [8.8 s]
+[10] train-result=0.2702, valid-result=0.2596 [8.7 s]
+[11] train-result=0.2701, valid-result=0.2616 [9.0 s]
+[12] train-result=0.2685, valid-result=0.2591 [10.6 s]
+[13] train-result=0.2706, valid-result=0.2605 [8.5 s]
+[14] train-result=0.2703, valid-result=0.2606 [8.4 s]
+[15] train-result=0.2693, valid-result=0.2591 [8.9 s]
+[16] train-result=0.2719, valid-result=0.2597 [8.3 s]
+[17] train-result=0.2721, valid-result=0.2610 [8.5 s]
+[18] train-result=0.2714, valid-result=0.2609 [11.0 s]
+[19] train-result=0.2739, valid-result=0.2622 [8.5 s]
+[20] train-result=0.2730, valid-result=0.2627 [8.3 s]
+[21] train-result=0.2720, valid-result=0.2597 [9.5 s]
+[22] train-result=0.2736, valid-result=0.2627 [9.5 s]
+[23] train-result=0.2723, valid-result=0.2635 [11.2 s]
+[24] train-result=0.2735, valid-result=0.2629 [8.7 s]
+[25] train-result=0.2734, valid-result=0.2645 [8.6 s]
+[26] train-result=0.2740, valid-result=0.2657 [8.4 s]
+[27] train-result=0.2757, valid-result=0.2654 [8.3 s]
+[28] train-result=0.2771, valid-result=0.2667 [8.9 s]
+[29] train-result=0.2785, valid-result=0.2667 [11.1 s]
+[30] train-result=0.2785, valid-result=0.2672 [9.4 s]
+2022-04-14 09:37:21.174279: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:37:21.174365: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:37:21.174442: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:37:21.174465: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:37:21.174486: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:37:21.174502: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:37:21.174517: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:37:21.174591: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:37:21.175209: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:37:21.175253: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:37:21.175269: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:37:21.175301: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:37:21.175995: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13483
+[1] train-result=0.0715, valid-result=0.1568 [10.3 s]
+[2] train-result=0.2399, valid-result=0.2387 [9.0 s]
+[3] train-result=0.2541, valid-result=0.2454 [10.9 s]
+[4] train-result=0.2697, valid-result=0.2584 [8.2 s]
+[5] train-result=0.2665, valid-result=0.2592 [8.2 s]
+[6] train-result=0.2645, valid-result=0.2572 [8.1 s]
+[7] train-result=0.2686, valid-result=0.2586 [8.4 s]
+[8] train-result=0.2694, valid-result=0.2594 [8.6 s]
+[9] train-result=0.2709, valid-result=0.2578 [12.3 s]
+[10] train-result=0.2730, valid-result=0.2613 [8.9 s]
+[11] train-result=0.2716, valid-result=0.2609 [8.2 s]
+[12] train-result=0.2702, valid-result=0.2622 [8.4 s]
+[13] train-result=0.2701, valid-result=0.2607 [8.9 s]
+[14] train-result=0.2749, valid-result=0.2642 [10.6 s]
+[15] train-result=0.2731, valid-result=0.2626 [8.1 s]
+[16] train-result=0.2728, valid-result=0.2625 [8.9 s]
+[17] train-result=0.2693, valid-result=0.2640 [9.1 s]
+[18] train-result=0.2755, valid-result=0.2626 [8.5 s]
+[19] train-result=0.2738, valid-result=0.2654 [8.0 s]
+[20] train-result=0.2737, valid-result=0.2638 [9.6 s]
+[21] train-result=0.2729, valid-result=0.2645 [7.9 s]
+[22] train-result=0.2758, valid-result=0.2657 [7.8 s]
+[23] train-result=0.2773, valid-result=0.2661 [7.9 s]
+[24] train-result=0.2789, valid-result=0.2661 [8.0 s]
+[25] train-result=0.2795, valid-result=0.2663 [9.9 s]
+[26] train-result=0.2797, valid-result=0.2663 [8.6 s]
+[27] train-result=0.2808, valid-result=0.2661 [8.3 s]
+[28] train-result=0.2810, valid-result=0.2661 [8.7 s]
+[29] train-result=0.2811, valid-result=0.2666 [9.2 s]
+[30] train-result=0.2808, valid-result=0.2659 [8.7 s]
+DeepFM: 0.26627 (0.00063)
+2022-04-14 09:42:25.836510: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:42:25.836605: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:42:25.836707: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:42:25.836728: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:42:25.836771: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:42:25.836805: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:42:25.836859: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:42:25.836889: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:42:25.837524: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:42:25.837588: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:42:25.837605: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:42:25.837621: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:42:25.838314: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13451
+[1] train-result=0.2488, valid-result=0.2384 [8.5 s]
+[2] train-result=0.2668, valid-result=0.2508 [8.0 s]
+[3] train-result=0.2735, valid-result=0.2576 [10.8 s]
+[4] train-result=0.2767, valid-result=0.2607 [8.1 s]
+[5] train-result=0.2786, valid-result=0.2625 [7.5 s]
+[6] train-result=0.2799, valid-result=0.2636 [7.6 s]
+[7] train-result=0.2800, valid-result=0.2629 [8.1 s]
+[8] train-result=0.2808, valid-result=0.2637 [9.5 s]
+[9] train-result=0.2823, valid-result=0.2653 [7.6 s]
+[10] train-result=0.2836, valid-result=0.2655 [8.3 s]
+[11] train-result=0.2852, valid-result=0.2656 [7.5 s]
+[12] train-result=0.2863, valid-result=0.2664 [7.7 s]
+[13] train-result=0.2885, valid-result=0.2661 [7.4 s]
+[14] train-result=0.2893, valid-result=0.2663 [9.5 s]
+[15] train-result=0.2898, valid-result=0.2659 [7.4 s]
+[16] train-result=0.2919, valid-result=0.2660 [7.4 s]
+[17] train-result=0.2929, valid-result=0.2649 [7.3 s]
+[18] train-result=0.2948, valid-result=0.2656 [7.3 s]
+[19] train-result=0.2962, valid-result=0.2649 [9.4 s]
+[20] train-result=0.2973, valid-result=0.2664 [7.3 s]
+[21] train-result=0.2993, valid-result=0.2658 [7.4 s]
+[22] train-result=0.3000, valid-result=0.2660 [7.3 s]
+[23] train-result=0.3007, valid-result=0.2650 [7.3 s]
+[24] train-result=0.3013, valid-result=0.2651 [7.6 s]
+[25] train-result=0.3015, valid-result=0.2625 [9.2 s]
+[26] train-result=0.3029, valid-result=0.2654 [7.3 s]
+[27] train-result=0.3035, valid-result=0.2659 [7.3 s]
+[28] train-result=0.3054, valid-result=0.2661 [7.6 s]
+[29] train-result=0.3077, valid-result=0.2652 [7.3 s]
+[30] train-result=0.3091, valid-result=0.2658 [9.5 s]
+2022-04-14 09:46:31.868742: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:46:31.868872: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:46:31.868988: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:46:31.869010: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:46:31.869039: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:46:31.869077: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:46:31.869123: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:46:31.869156: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:46:31.869899: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:46:31.869954: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:46:31.869984: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:46:31.870006: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:46:31.870716: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13451
+[1] train-result=0.2416, valid-result=0.2367 [7.5 s]
+[2] train-result=0.2635, valid-result=0.2543 [7.3 s]
+[3] train-result=0.2700, valid-result=0.2596 [7.9 s]
+[4] train-result=0.2725, valid-result=0.2609 [7.4 s]
+[5] train-result=0.2749, valid-result=0.2629 [9.3 s]
+[6] train-result=0.2762, valid-result=0.2631 [7.6 s]
+[7] train-result=0.2779, valid-result=0.2656 [7.4 s]
+[8] train-result=0.2786, valid-result=0.2651 [7.4 s]
+[9] train-result=0.2788, valid-result=0.2656 [7.4 s]
+[10] train-result=0.2790, valid-result=0.2668 [9.0 s]
+[11] train-result=0.2797, valid-result=0.2669 [7.4 s]
+[12] train-result=0.2800, valid-result=0.2671 [7.6 s]
+[13] train-result=0.2810, valid-result=0.2683 [7.5 s]
+[14] train-result=0.2840, valid-result=0.2681 [7.5 s]
+[15] train-result=0.2851, valid-result=0.2683 [7.4 s]
+[16] train-result=0.2864, valid-result=0.2698 [10.0 s]
+[17] train-result=0.2871, valid-result=0.2690 [7.8 s]
+[18] train-result=0.2872, valid-result=0.2682 [7.8 s]
+[19] train-result=0.2871, valid-result=0.2684 [7.6 s]
+[20] train-result=0.2884, valid-result=0.2678 [7.8 s]
+[21] train-result=0.2886, valid-result=0.2695 [9.1 s]
+[22] train-result=0.2887, valid-result=0.2706 [7.3 s]
+[23] train-result=0.2896, valid-result=0.2688 [7.7 s]
+[24] train-result=0.2899, valid-result=0.2697 [7.3 s]
+[25] train-result=0.2904, valid-result=0.2686 [7.3 s]
+[26] train-result=0.2901, valid-result=0.2702 [7.6 s]
+[27] train-result=0.2914, valid-result=0.2698 [10.1 s]
+[28] train-result=0.2915, valid-result=0.2692 [7.4 s]
+[29] train-result=0.2923, valid-result=0.2697 [7.4 s]
+[30] train-result=0.2927, valid-result=0.2694 [7.4 s]
+2022-04-14 09:50:33.580115: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:50:33.580255: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:50:33.580430: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:50:33.580454: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:50:33.580490: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:50:33.580508: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:50:33.580555: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:50:33.580579: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:50:33.581253: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:50:33.581326: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:50:33.581342: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:50:33.581358: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:50:33.582101: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13451
+[1] train-result=0.2609, valid-result=0.2544 [9.3 s]
+[2] train-result=0.2716, valid-result=0.2610 [7.3 s]
+[3] train-result=0.2749, valid-result=0.2632 [7.3 s]
+[4] train-result=0.2764, valid-result=0.2639 [7.3 s]
+[5] train-result=0.2773, valid-result=0.2634 [7.7 s]
+[6] train-result=0.2788, valid-result=0.2664 [7.3 s]
+[7] train-result=0.2801, valid-result=0.2658 [9.3 s]
+[8] train-result=0.2802, valid-result=0.2652 [7.3 s]
+[9] train-result=0.2807, valid-result=0.2656 [8.0 s]
+[10] train-result=0.2810, valid-result=0.2666 [7.8 s]
+[11] train-result=0.2812, valid-result=0.2669 [7.8 s]
+[12] train-result=0.2817, valid-result=0.2671 [9.6 s]
+[13] train-result=0.2810, valid-result=0.2648 [7.4 s]
+[14] train-result=0.2821, valid-result=0.2671 [7.4 s]
+[15] train-result=0.2824, valid-result=0.2674 [7.7 s]
+[16] train-result=0.2836, valid-result=0.2670 [7.3 s]
+[17] train-result=0.2853, valid-result=0.2681 [7.4 s]
+[18] train-result=0.2867, valid-result=0.2683 [9.4 s]
+[19] train-result=0.2875, valid-result=0.2688 [7.4 s]
+[20] train-result=0.2879, valid-result=0.2679 [7.3 s]
+[21] train-result=0.2912, valid-result=0.2692 [7.3 s]
+[22] train-result=0.2915, valid-result=0.2687 [7.4 s]
+[23] train-result=0.2919, valid-result=0.2690 [9.5 s]
+[24] train-result=0.2937, valid-result=0.2685 [7.5 s]
+[25] train-result=0.2959, valid-result=0.2677 [7.4 s]
+[26] train-result=0.2969, valid-result=0.2684 [7.4 s]
+[27] train-result=0.2975, valid-result=0.2687 [7.4 s]
+[28] train-result=0.2988, valid-result=0.2678 [7.4 s]
+[29] train-result=0.2997, valid-result=0.2678 [9.2 s]
+[30] train-result=0.3004, valid-result=0.2682 [7.5 s]
+FM: 0.26781 (0.00149)
+2022-04-14 09:55:05.007835: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:55:05.007975: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:55:05.008082: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:55:05.008104: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:55:05.008124: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:55:05.008153: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:55:05.008180: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:55:05.008199: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:55:05.008867: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:55:05.008953: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:55:05.008969: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:55:05.008989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:55:05.009731: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13436
+[1] train-result=-0.0196, valid-result=-0.0864 [9.0 s]
+[2] train-result=-0.0024, valid-result=0.0654 [7.7 s]
+[3] train-result=0.0557, valid-result=0.0897 [7.3 s]
+[4] train-result=0.1073, valid-result=0.1043 [7.4 s]
+[5] train-result=0.0507, valid-result=0.0974 [7.6 s]
+[6] train-result=0.1483, valid-result=0.1095 [9.1 s]
+[7] train-result=0.1386, valid-result=0.1608 [7.3 s]
+[8] train-result=0.0095, valid-result=0.0793 [7.4 s]
+[9] train-result=0.1953, valid-result=0.2119 [7.4 s]
+[10] train-result=0.0841, valid-result=0.1279 [7.5 s]
+[11] train-result=0.1881, valid-result=0.1840 [7.6 s]
+[12] train-result=0.1924, valid-result=0.1785 [9.2 s]
+[13] train-result=0.1611, valid-result=0.1619 [7.4 s]
+[14] train-result=0.2416, valid-result=0.2189 [7.4 s]
+[15] train-result=0.2661, valid-result=0.2469 [7.3 s]
+[16] train-result=0.2629, valid-result=0.2389 [7.3 s]
+[17] train-result=0.2707, valid-result=0.2539 [9.0 s]
+[18] train-result=0.2685, valid-result=0.2576 [7.3 s]
+[19] train-result=0.2776, valid-result=0.2590 [7.5 s]
+[20] train-result=0.2752, valid-result=0.2561 [7.5 s]
+[21] train-result=0.2700, valid-result=0.2550 [7.4 s]
+[22] train-result=0.2725, valid-result=0.2566 [7.3 s]
+[23] train-result=0.2724, valid-result=0.2547 [8.8 s]
+[24] train-result=0.2737, valid-result=0.2557 [7.4 s]
+[25] train-result=0.2753, valid-result=0.2561 [7.4 s]
+[26] train-result=0.2745, valid-result=0.2579 [7.2 s]
+[27] train-result=0.2733, valid-result=0.2556 [7.3 s]
+[28] train-result=0.2769, valid-result=0.2577 [7.3 s]
+[29] train-result=0.2775, valid-result=0.2576 [9.0 s]
+[30] train-result=0.2769, valid-result=0.2601 [7.4 s]
+2022-04-14 09:59:03.264276: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 09:59:03.264384: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 09:59:03.264490: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 09:59:03.264512: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 09:59:03.264530: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 09:59:03.264549: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 09:59:03.264565: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 09:59:03.264627: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 09:59:03.265302: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 09:59:03.265354: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 09:59:03.265369: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 09:59:03.265388: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 09:59:03.266090: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13436
+[1] train-result=0.1095, valid-result=0.1183 [7.5 s]
+[2] train-result=0.1497, valid-result=0.1855 [7.3 s]
+[3] train-result=0.2168, valid-result=0.2288 [8.6 s]
+[4] train-result=0.2200, valid-result=0.2133 [7.1 s]
+[5] train-result=0.2007, valid-result=0.2025 [7.1 s]
+[6] train-result=0.2257, valid-result=0.2321 [7.1 s]
+[7] train-result=0.2196, valid-result=0.2200 [7.1 s]
+[8] train-result=0.2193, valid-result=0.2215 [8.5 s]
+[9] train-result=0.2106, valid-result=0.2147 [7.1 s]
+[10] train-result=0.1838, valid-result=0.1970 [7.1 s]
+[11] train-result=0.2381, valid-result=0.2386 [7.1 s]
+[12] train-result=0.2549, valid-result=0.2471 [7.1 s]
+[13] train-result=0.2064, valid-result=0.2124 [7.2 s]
+[14] train-result=0.1812, valid-result=0.1988 [9.0 s]
+[15] train-result=0.2369, valid-result=0.2404 [7.3 s]
+[16] train-result=0.2562, valid-result=0.2497 [7.8 s]
+[17] train-result=0.2548, valid-result=0.2480 [9.9 s]
+[18] train-result=0.2565, valid-result=0.2491 [7.8 s]
+[19] train-result=0.2570, valid-result=0.2474 [10.5 s]
+[20] train-result=0.2663, valid-result=0.2584 [7.8 s]
+[21] train-result=0.2710, valid-result=0.2542 [8.8 s]
+[22] train-result=0.2731, valid-result=0.2584 [9.0 s]
+[23] train-result=0.2703, valid-result=0.2570 [8.7 s]
+[24] train-result=0.2727, valid-result=0.2635 [7.5 s]
+[25] train-result=0.2719, valid-result=0.2654 [9.6 s]
+[26] train-result=0.2719, valid-result=0.2599 [7.5 s]
+[27] train-result=0.2728, valid-result=0.2575 [7.3 s]
+[28] train-result=0.2706, valid-result=0.2626 [7.3 s]
+[29] train-result=0.2723, valid-result=0.2607 [7.1 s]
+[30] train-result=0.2697, valid-result=0.2561 [7.4 s]
+2022-04-14 10:03:08.157621: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1666] Found device 0 with properties: 
+name: Tesla V100-SXM2-16GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1a:00.0
+2022-04-14 10:03:08.157732: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-04-14 10:03:08.157843: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-04-14 10:03:08.157890: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-04-14 10:03:08.157920: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-04-14 10:03:08.157940: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.11
+2022-04-14 10:03:08.157969: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-04-14 10:03:08.157991: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-04-14 10:03:08.158679: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1794] Adding visible gpu devices: 0
+2022-04-14 10:03:08.158729: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1206] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-04-14 10:03:08.158746: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1212]      0 
+2022-04-14 10:03:08.158764: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1225] 0:   N 
+2022-04-14 10:03:08.159457: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1351] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11491 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-16GB, pci bus id: 0000:1a:00.0, compute capability: 7.0)
+#params: 13436
+[1] train-result=0.0199, valid-result=0.0944 [8.6 s]
+[2] train-result=-0.0312, valid-result=0.0796 [7.3 s]
+[3] train-result=0.0790, valid-result=0.0325 [7.6 s]
+[4] train-result=0.0199, valid-result=0.0638 [7.4 s]
+[5] train-result=0.0914, valid-result=0.1028 [9.1 s]
+[6] train-result=0.1592, valid-result=0.1540 [7.3 s]
+[7] train-result=-0.1330, valid-result=-0.1116 [7.4 s]
+[8] train-result=0.0834, valid-result=0.0619 [7.6 s]
+[9] train-result=0.2073, valid-result=0.2057 [7.2 s]
+[10] train-result=0.1870, valid-result=0.2022 [9.0 s]
+[11] train-result=0.1863, valid-result=0.1868 [7.4 s]
+[12] train-result=0.2360, valid-result=0.2284 [7.4 s]
+[13] train-result=0.1886, valid-result=0.1513 [7.6 s]
+[14] train-result=0.2266, valid-result=0.1994 [7.3 s]
+[15] train-result=0.2558, valid-result=0.2381 [7.4 s]
+[16] train-result=0.1832, valid-result=0.1829 [9.5 s]
+[17] train-result=0.2734, valid-result=0.2630 [7.4 s]
+[18] train-result=0.2686, valid-result=0.2606 [7.4 s]
+[19] train-result=0.2719, valid-result=0.2558 [7.4 s]
+[20] train-result=0.2749, valid-result=0.2605 [7.3 s]
+[21] train-result=0.2712, valid-result=0.2570 [7.3 s]
+[22] train-result=0.2749, valid-result=0.2592 [8.8 s]
+[23] train-result=0.2746, valid-result=0.2587 [7.3 s]
+[24] train-result=0.2752, valid-result=0.2583 [7.5 s]
+[25] train-result=0.2758, valid-result=0.2622 [7.5 s]
+[26] train-result=0.2757, valid-result=0.2626 [7.5 s]
+[27] train-result=0.2765, valid-result=0.2601 [9.0 s]
+[28] train-result=0.2745, valid-result=0.2589 [7.4 s]
+[29] train-result=0.2750, valid-result=0.2614 [7.3 s]
+[30] train-result=0.2731, valid-result=0.2599 [7.4 s]
+DNN: 0.25867 (0.00184)

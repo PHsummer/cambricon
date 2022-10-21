@@ -1,0 +1,31 @@
+result_template:
+  tf-ngc: 
+    framework: tf1
+    _soft_info_name: "ngc: 20.10-tf1-py3"
+    _hard_info_name: "Dell-C4140"
+    dataset: "imagenet2012"
+    batch_size: 128
+    train_exec_mode: fp32
+    eval_exec_mode: fp32
+    dist_mode: hvd
+    device: gpu-v100
+    dev_num: 4
+    tags:
+      - "modelzoo"
+
+results:
+  - 
+    md5: 3dc85ee3c4de
+    code_link: https://github.com/NVIDIA/DeepLearningExamples/blob/33bdf65b18c248f828b4611b67146384e2e613a3/TensorFlow/Classification/ConvNets/model/resnet.py
+    _model_name: "resnet50v1.5"
+    __template: tf-ngc
+    metrics:
+      top1-acc: 77.35
+      top5-acc: 98.23
+    tags:
+    - t1
+    - t2
+    # db_op: update
+
+
+

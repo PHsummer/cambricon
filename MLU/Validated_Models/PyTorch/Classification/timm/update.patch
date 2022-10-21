@@ -1,0 +1,45 @@
+diff --git a/timm/utils/__init__.py b/timm/utils/__init__.py
+index b8cef32..4bc1165 100644
+--- a/timm/utils/__init__.py
++++ b/timm/utils/__init__.py
+@@ -1,7 +1,7 @@
+ from .agc import adaptive_clip_grad
+ from .checkpoint_saver import CheckpointSaver
+ from .clip_grad import dispatch_clip_grad
+-from .cuda import ApexScaler, NativeScaler
++#from .cuda import ApexScaler, NativeScaler
+ from .distributed import distribute_bn, reduce_tensor
+ from .jit import set_jit_legacy, set_jit_fuser
+ from .log import setup_default_logging, FormatterNoInfo
+diff --git a/train.py b/train.py
+index acdf93c..a0a6174 100755
+--- a/train.py
++++ b/train.py
+@@ -38,7 +38,7 @@ from timm.loss import JsdCrossEntropy, BinaryCrossEntropy, SoftTargetCrossEntrop
+     LabelSmoothingCrossEntropy
+ from timm.optim import create_optimizer_v2, optimizer_kwargs
+ from timm.scheduler import create_scheduler
+-from timm.utils import ApexScaler, NativeScaler
++#from timm.utils import ApexScaler, NativeScaler
+ 
+ try:
+     from apex import amp
+@@ -129,6 +129,8 @@ group.add_argument('--fuser', default='', type=str,
+                     help="Select jit fuser. One of ('', 'te', 'old', 'nvfuser')")
+ group.add_argument('--grad-checkpointing', action='store_true', default=False,
+                     help='Enable gradient checkpointing through model blocks/stages')
++parser.add_argument('--iters', type=int, default=30000, metavar='N',
++                    help='iters per epoch')
+ 
+ # Optimizer parameters
+ group = parser.add_argument_group('Optimizer parameters')
+@@ -738,6 +740,8 @@ def train_one_epoch(
+         torch.cuda.synchronize()
+         num_updates += 1
+         batch_time_m.update(time.time() - end)
++        if batch_idx == args.iters:
++            break
+         if last_batch or batch_idx % args.log_interval == 0:
+             lrl = [param_group['lr'] for param_group in optimizer.param_groups]
+             lr = sum(lrl) / len(lrl)
+/

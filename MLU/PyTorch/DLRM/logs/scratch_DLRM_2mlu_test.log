@@ -1,0 +1,111 @@
+Parameters Exact.
+/torch/src/pytorch_models/Training/Recommendation/DLRM/training/recommendation/pytorch /torch/src/pytorch_models/Training/Recommendation/DLRM/cambricon
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple/, http://mirrors.cambricon.com/pypi/web/simple/, https://mirrors.aliyun.com/pypi/simple/
+Requirement already satisfied: numpy_indexed in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 1)) (0.3.5)
+Requirement already satisfied: mlperf_compliance in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 2)) (0.0.10)
+Requirement already satisfied: tqdm in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 3)) (4.63.1)
+Requirement already satisfied: scipy in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 4)) (1.5.4)
+Requirement already satisfied: torch in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 5)) (1.6.0)
+Requirement already satisfied: numpy in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 6)) (1.19.5)
+Requirement already satisfied: pandas in /torch/venv3/pytorch/lib/python3.6/site-packages (from -r requirements.txt (line 7)) (1.1.5)
+Requirement already satisfied: future in /torch/venv3/pytorch/lib/python3.6/site-packages (from numpy_indexed->-r requirements.txt (line 1)) (0.18.2)
+Requirement already satisfied: importlib-resources in /torch/venv3/pytorch/lib/python3.6/site-packages (from tqdm->-r requirements.txt (line 3)) (5.4.0)
+Requirement already satisfied: pytz>=2017.2 in /torch/venv3/pytorch/lib/python3.6/site-packages (from pandas->-r requirements.txt (line 7)) (2022.1)
+Requirement already satisfied: python-dateutil>=2.7.3 in /torch/venv3/pytorch/lib/python3.6/site-packages (from pandas->-r requirements.txt (line 7)) (2.8.2)
+Requirement already satisfied: six>=1.5 in /torch/venv3/pytorch/lib/python3.6/site-packages (from python-dateutil>=2.7.3->pandas->-r requirements.txt (line 7)) (1.16.0)
+Requirement already satisfied: zipp>=3.1.0 in /torch/venv3/pytorch/lib/python3.6/site-packages (from importlib-resources->tqdm->-r requirements.txt (line 3)) (3.6.0)
+WARNING: You are using pip version 21.1.3; however, version 21.3.1 is available.
+You should consider upgrading via the '/torch/venv3/pytorch/bin/python -m pip install --upgrade pip' command.
+Looking in indexes: https://pypi.tuna.tsinghua.edu.cn/simple/, http://mirrors.cambricon.com/pypi/web/simple/, https://mirrors.aliyun.com/pypi/simple/
+Collecting git+https://github.com/mlperf/logging.git
+  Cloning https://github.com/mlperf/logging.git to /tmp/pip-req-build-1bpk4z77
+  Running command git clone -q https://github.com/mlperf/logging.git /tmp/pip-req-build-1bpk4z77
+Requirement already satisfied: pandas>=1.0 in /torch/venv3/pytorch/lib/python3.6/site-packages (from mlperf-logging==2.0.0rc3) (1.1.5)
+Requirement already satisfied: pyyaml>=5.4.1 in /torch/venv3/pytorch/lib/python3.6/site-packages (from mlperf-logging==2.0.0rc3) (6.0)
+Requirement already satisfied: numpy>=1.17.3 in /torch/venv3/pytorch/lib/python3.6/site-packages (from mlperf-logging==2.0.0rc3) (1.19.5)
+Requirement already satisfied: scipy>=1.4.1 in /torch/venv3/pytorch/lib/python3.6/site-packages (from mlperf-logging==2.0.0rc3) (1.5.4)
+Requirement already satisfied: python-dateutil>=2.7.3 in /torch/venv3/pytorch/lib/python3.6/site-packages (from pandas>=1.0->mlperf-logging==2.0.0rc3) (2.8.2)
+Requirement already satisfied: pytz>=2017.2 in /torch/venv3/pytorch/lib/python3.6/site-packages (from pandas>=1.0->mlperf-logging==2.0.0rc3) (2022.1)
+Requirement already satisfied: six>=1.5 in /torch/venv3/pytorch/lib/python3.6/site-packages (from python-dateutil>=2.7.3->pandas>=1.0->mlperf-logging==2.0.0rc3) (1.16.0)
+WARNING: You are using pip version 21.1.3; however, version 21.3.1 is available.
+You should consider upgrading via the '/torch/venv3/pytorch/bin/python -m pip install --upgrade pip' command.
+STARTING TIMING RUN AT 2022-05-27 11:25:22 AM
+/torch/src/pytorch_models/Training/Recommendation/DLRM/training/recommendation/pytorch/../../../../tools/utils/
+Using seed = 0
+device: mlu n_device: 1
+Saving config and results to ./run/neumf/1653593124
+
+:::MLPv0.5.0 ncf 1653621923.861101151 (ncf.py:311) preproc_hp_num_eval: 999
+
+:::MLPv0.5.0 ncf 1653621923.861482382 (ncf.py:313) preproc_hp_sample_eval_replacement: true
+
+:::MLPv0.5.0 ncf 1653621923.861726046 (ncf.py:314) input_hp_sample_train_replacement: true
+
+:::MLPv0.5.0 ncf 1653621923.861948967 (ncf.py:315) input_step_eval_neg_gen
+2022-05-27 11:25:23.861991 Loading preprocessed sampler.
+Using alias file: /data/pytorch/datasets//ml-20mx4x16
+2022-05-27 11:25:29.360873 Alias table loaded.
+
+:::MLPv0.5.0 ncf 1653621961.126461029 (ncf.py:647) input_size: 131203749
+2022-05-27 11:26:01.418724 Train Data loading done 37.6 sec. #user=498975, #item=427888, #train=131203749, #test=498975
+
+:::MLPv0.5.0 ncf 1653621961.419722795 (/torch/src/pytorch_models/Training/Recommendation/DLRM/training/recommendation/pytorch/neumf.py:20) model_hp_mf_dim: 64
+
+:::MLPv0.5.0 ncf 1653621963.156244993 (/torch/src/pytorch_models/Training/Recommendation/DLRM/training/recommendation/pytorch/neumf.py:28) model_hp_mlp_layer_sizes: [256, 256, 128, 64]
+NeuMF(
+  (mf_user_embed): Embedding(498975, 64)
+  (mf_item_embed): Embedding(427888, 64)
+  (mlp_user_embed): Embedding(498975, 128)
+  (mlp_item_embed): Embedding(427888, 128)
+  (mlp): ModuleList(
+    (0): Linear(in_features=256, out_features=256, bias=True)
+    (1): Linear(in_features=256, out_features=128, bias=True)
+    (2): Linear(in_features=128, out_features=64, bias=True)
+  )
+  (final): Linear(in_features=128, out_features=1, bias=True)
+)
+178064769 parameters
+
+:::MLPv0.5.0 ncf 1653621964.757055283 (ncf.py:664) opt_learning_rate: 0.0001
+
+:::MLPv0.5.0 ncf 1653621964.757361650 (ncf.py:665) opt_name: "Adam"
+
+:::MLPv0.5.0 ncf 1653621964.757620335 (ncf.py:666) opt_hp_Adam_beta1: 0.9
+
+:::MLPv0.5.0 ncf 1653621964.757851839 (ncf.py:667) opt_hp_Adam_beta2: 0.999
+
+:::MLPv0.5.0 ncf 1653621964.758080006 (ncf.py:668) opt_hp_Adam_epsilon: 1e-08
+
+:::MLPv0.5.0 ncf 1653621964.758296251 (ncf.py:669) model_hp_loss_fn: "binary_cross_entropy"
+=> Loading checkpoint: /torch/src/pytorch_models/Training/Recommendation/DLRM/training/recommendation/pytorch/ckp/dlrm_19.pth
+Resume from epoch 19
+
+:::MLPv0.5.0 ncf 1653621965.847246170 (ncf.py:701) eval_start: 19
+2022-05-27 11:26:05.847440 Loading test ratings.
+2022-05-27 11:26:05.905431 Loading test negatives.
+2022-05-27 11:26:11.725773 Test negative chunk 1 of 4 loaded (torch.Size([112902984, 2]) users).
+2022-05-27 11:26:18.273057 Test negative chunk 2 of 4 loaded (torch.Size([126798075, 2]) users).
+2022-05-27 11:26:24.517780 Test negative chunk 3 of 4 loaded (torch.Size([120673206, 2]) users).
+2022-05-27 11:26:31.676719 Test negative chunk 4 of 4 loaded (torch.Size([138101760, 2]) users).
+
+:::MLPv0.5.0 ncf 1653622086.105805635 (ncf.py:193) input_batch_size: 65536
+
+:::MLPv0.5.0 ncf 1653622086.106319189 (ncf.py:194) input_order
+[2022-5-27 11:28:8] [CNNL] [Warning]: [cnnlSetActivationDescriptor] is deprecated and will be removed in the future release, plsase use [cnnlSetActivationDescriptor_v4] instead.
+[2022-5-27 11:28:8] [CNNL] [Warning]: [cnnlFill] is deprecated and will be removed in the future release, please use [cnnlFill_v3] instead.
+
+:::MLPv0.5.0 ncf 1653622225.810109854 (ncf.py:235) eval_size: {"epoch": 19, "value": 498975000}
+
+:::MLPv0.5.0 ncf 1653622225.810775280 (ncf.py:236) eval_hp_num_users: 498975
+
+:::MLPv0.5.0 ncf 1653622225.811145306 (ncf.py:237) eval_hp_num_neg: 999
+Epoch 19: HR@10 = 0.5400, NDCG@10 = 0.2938, val_time = 260.32
+
+:::MLPv0.5.0 ncf 1653622226.167076349 (ncf.py:719) eval_accuracy: {"epoch": 19, "value": 0.5399789568615662}
+
+:::MLPv0.5.0 ncf 1653622226.167387724 (ncf.py:720) eval_target: 1.0
+
+:::MLPv0.5.0 ncf 1653622226.167617798 (ncf.py:721) eval_stop: 19
+ENDING TIMING RUN AT 2022-05-27 11:30:26 AM
+RESULT,recommendation,0,304,,2022-05-27 11:25:22 AM
+/torch/src/pytorch_models/Training/Recommendation/DLRM/cambricon

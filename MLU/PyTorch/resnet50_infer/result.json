@@ -1,0 +1,238 @@
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.42",
+            "throughput(fps)": "24021.09"
+        },
+        "HostLatency(ms)": {
+            "average": "4.19",
+            "throughput(fps)": "2386.23"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "84.69",
+            "top5": "95.94"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.60",
+            "throughput(fps)": "53708.58"
+        },
+        "HostLatency(ms)": {
+            "average": "2.83",
+            "throughput(fps)": "11313.24"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "87.19",
+            "top5": "97.03"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.63",
+            "throughput(fps)": "101429.83"
+        },
+        "HostLatency(ms)": {
+            "average": "4.50",
+            "throughput(fps)": "14234.82"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.65",
+            "throughput(fps)": "15471.90"
+        },
+        "HostLatency(ms)": {
+            "average": "1.60",
+            "throughput(fps)": "6250.09"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "84.69",
+            "top5": "95.94"
+        },
+        "HardwareLatency(ms)": {
+            "average": "1.11",
+            "throughput(fps)": "28916.28"
+        },
+        "HostLatency(ms)": {
+            "average": "2.15",
+            "throughput(fps)": "14886.35"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "87.19",
+            "top5": "97.03"
+        },
+        "HardwareLatency(ms)": {
+            "average": "1.37",
+            "throughput(fps)": "46834.27"
+        },
+        "HostLatency(ms)": {
+            "average": "2.53",
+            "throughput(fps)": "25346.44"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.45",
+            "throughput(fps)": "22378.10"
+        },
+        "HostLatency(ms)": {
+            "average": "6.70",
+            "throughput(fps)": "1493.04"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "84.69",
+            "top5": "95.94"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.51",
+            "throughput(fps)": "62382.27"
+        },
+        "HostLatency(ms)": {
+            "average": "2.61",
+            "throughput(fps)": "12252.17"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "87.19",
+            "top5": "97.03"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.80",
+            "throughput(fps)": "80391.73"
+        },
+        "HostLatency(ms)": {
+            "average": "4.01",
+            "throughput(fps)": "15978.74"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.49",
+            "throughput(fps)": "20303.40"
+        },
+        "HostLatency(ms)": {
+            "average": "1.24",
+            "throughput(fps)": "8088.30"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "84.69",
+            "top5": "95.94"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.86",
+            "throughput(fps)": "37387.53"
+        },
+        "HostLatency(ms)": {
+            "average": "1.88",
+            "throughput(fps)": "16986.36"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "87.19",
+            "top5": "97.03"
+        },
+        "HardwareLatency(ms)": {
+            "average": "1.05",
+            "throughput(fps)": "61170.43"
+        },
+        "HostLatency(ms)": {
+            "average": "2.21",
+            "throughput(fps)": "29002.00"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.45",
+            "throughput(fps)": "22415.86"
+        },
+        "HostLatency(ms)": {
+            "average": "1.97",
+            "throughput(fps)": "5068.00"
+        }
+    }
+}
+{
+    "Output": {
+        "Accuracy": {
+            "meanAp": "-1.00",
+            "top1": "89.00",
+            "top5": "98.00"
+        },
+        "HardwareLatency(ms)": {
+            "average": "0.55",
+            "throughput(fps)": "18307.42"
+        },
+        "HostLatency(ms)": {
+            "average": "1.29",
+            "throughput(fps)": "7771.93"
+        }
+    }
+}

@@ -1,0 +1,579 @@
+022-04-23 16:25:14,055   INFO  **********************Start logging**********************
+2022-04-23 16:25:14,055   INFO  CUDA_VISIBLE_DEVICES=ALL
+2022-04-23 16:25:14,055   INFO  total_batch_size: 16
+2022-04-23 16:25:14,055   INFO  cfg_file         /workspace/cfgs/cbgs_pp_multihead.yaml
+2022-04-23 16:25:14,056   INFO  batch_size       2
+2022-04-23 16:25:14,056   INFO  epochs           20
+2022-04-23 16:25:14,056   INFO  workers          4
+2022-04-23 16:25:14,056   INFO  extra_tag        default
+2022-04-23 16:25:14,056   INFO  ckpt             None
+2022-04-23 16:25:14,056   INFO  pretrained_model None
+2022-04-23 16:25:14,056   INFO  launcher         pytorch
+2022-04-23 16:25:14,056   INFO  tcp_port         18888
+2022-04-23 16:25:14,057   INFO  sync_bn          False
+2022-04-23 16:25:14,057   INFO  fix_random_seed  True
+2022-04-23 16:25:14,057   INFO  ckpt_save_interval 1
+2022-04-23 16:25:14,057   INFO  local_rank       0
+2022-04-23 16:25:14,057   INFO  max_ckpt_save_num 30
+2022-04-23 16:25:14,057   INFO  merge_all_iters_to_one_epoch False
+2022-04-23 16:25:14,057   INFO  set_cfgs         None
+2022-04-23 16:25:14,057   INFO  max_waiting_mins 0
+2022-04-23 16:25:14,057   INFO  start_epoch      0
+2022-04-23 16:25:14,057   INFO  num_epochs_to_eval 0
+2022-04-23 16:25:14,057   INFO  save_to_file     False
+2022-04-23 16:25:14,057   INFO  cfg.ROOT_DIR: /workspace/OpenPCDet
+2022-04-23 16:25:14,057   INFO  cfg.LOCAL_RANK: 0
+2022-04-23 16:25:14,057   INFO  cfg.CLASS_NAMES: ['car', 'truck', 'construction_vehicle', 'bus', 'trailer', 'barrier', 'motorcycle', 'bicycle', 'pedestrian', 'traffic_cone']
+2022-04-23 16:25:14,058   INFO  
+cfg.DATA_CONFIG = edict()
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.DATASET: NuScenesDataset
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.DATA_PATH: /data/datasets1/nuScenes
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.VERSION: v1.0-trainval
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.MAX_SWEEPS: 10
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.PRED_VELOCITY: True
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.SET_NAN_VELOCITY_TO_ZEROS: True
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.FILTER_MIN_POINTS_IN_GT: 1
+2022-04-23 16:25:14,058   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2022-04-23 16:25:14,058   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['nuscenes_infos_10sweeps_train.pkl']
+2022-04-23 16:25:14,058   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['nuscenes_infos_10sweeps_val.pkl']
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [-51.2, -51.2, -5.0, 51.2, 51.2, 3.0]
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.BALANCED_RESAMPLING: True
+2022-04-23 16:25:14,059   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'DB_INFO_PATH': ['nuscenes_dbinfos_10sweeps_withvelo.pkl'], 'PREPARE': {'filter_by_min_points': ['car:5', 'truck:5', 'construction_vehicle:5', 'bus:5', 'trailer:5', 'barrier:5', 'motorcycle:5', 'bicycle:5', 'pedestrian:5', 'traffic_cone:5']}, 'SAMPLE_GROUPS': ['car:2', 'truck:3', 'construction_vehicle:7', 'bus:4', 'trailer:6', 'barrier:2', 'motorcycle:6', 'bicycle:6', 'pedestrian:2', 'traffic_cone:2'], 'NUM_POINT_FEATURES': 5, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': True}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x', 'y']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.3925, 0.3925]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2022-04-23 16:25:14,059   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity', 'timestamp']
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': True}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.2, 0.2, 8.0], 'MAX_POINTS_PER_VOXEL': 20, 'MAX_NUMBER_OF_VOXELS': {'train': 30000, 'test': 30000}}]
+2022-04-23 16:25:14,059   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: /workspace/cfgs/nuscenes_dataset.yaml
+2022-04-23 16:25:14,059   INFO  
+cfg.MODEL = edict()
+2022-04-23 16:25:14,059   INFO  cfg.MODEL.NAME: PointPillar
+2022-04-23 16:25:14,059   INFO  
+cfg.MODEL.VFE = edict()
+2022-04-23 16:25:14,059   INFO  cfg.MODEL.VFE.NAME: PillarVFE
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.VFE.WITH_DISTANCE: False
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.VFE.USE_ABSLOTE_XYZ: True
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.VFE.USE_NORM: True
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.VFE.NUM_FILTERS: [64]
+2022-04-23 16:25:14,060   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.MAP_TO_BEV.NAME: PointPillarScatter
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 64
+2022-04-23 16:25:14,060   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [3, 5, 5]
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [2, 2, 2]
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128, 256]
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [0.5, 1, 2]
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128, 128]
+2022-04-23 16:25:14,060   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2022-04-23 16:25:14,060   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadMulti
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.USE_MULTIHEAD: True
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_MULTIHEAD: True
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'car', 'anchor_sizes': [[4.63, 1.97, 1.74]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.95], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'truck', 'anchor_sizes': [[6.93, 2.51, 2.84]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.55, 'unmatched_threshold': 0.4}, {'class_name': 'construction_vehicle', 'anchor_sizes': [[6.37, 2.85, 3.19]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.225], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'bus', 'anchor_sizes': [[10.5, 2.94, 3.47]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.085], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.55, 'unmatched_threshold': 0.4}, {'class_name': 'trailer', 'anchor_sizes': [[12.29, 2.9, 3.87]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [0.115], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'barrier', 'anchor_sizes': [[0.5, 2.53, 0.98]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.33], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.55, 'unmatched_threshold': 0.4}, {'class_name': 'motorcycle', 'anchor_sizes': [[2.11, 0.77, 1.47]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.085], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.5, 'unmatched_threshold': 0.3}, {'class_name': 'bicycle', 'anchor_sizes': [[1.7, 0.6, 1.28]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.18], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'pedestrian', 'anchor_sizes': [[0.73, 0.67, 1.77]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.935], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.6, 'unmatched_threshold': 0.4}, {'class_name': 'traffic_cone', 'anchor_sizes': [[0.41, 0.41, 1.07]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.285], 'align_center': False, 'feature_map_stride': 4, 'matched_threshold': 0.6, 'unmatched_threshold': 0.4}]
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.SHARED_CONV_NUM_FILTER: 64
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.RPN_HEAD_CFGS: [{'HEAD_CLS_NAME': ['car']}, {'HEAD_CLS_NAME': ['truck', 'construction_vehicle']}, {'HEAD_CLS_NAME': ['bus', 'trailer']}, {'HEAD_CLS_NAME': ['barrier']}, {'HEAD_CLS_NAME': ['motorcycle', 'bicycle']}, {'HEAD_CLS_NAME': ['pedestrian', 'traffic_cone']}]
+2022-04-23 16:25:14,061   INFO  
+cfg.MODEL.DENSE_HEAD.SEPARATE_REG_CONFIG = edict()
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_REG_CONFIG.NUM_MIDDLE_CONV: 1
+2022-04-23 16:25:14,061   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_REG_CONFIG.NUM_MIDDLE_FILTER: 64
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.SEPARATE_REG_CONFIG.REG_LIST: ['reg:2', 'height:1', 'size:3', 'angle:2', 'velo:2']
+2022-04-23 16:25:14,062   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2022-04-23 16:25:14,062   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER_CONFIG = edict()
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER_CONFIG.code_size: 9
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER_CONFIG.encode_angle_by_sincos: True
+2022-04-23 16:25:14,062   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.REG_LOSS_TYPE: WeightedL1Loss
+2022-04-23 16:25:14,062   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.pos_cls_weight: 1.0
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.neg_cls_weight: 2.0
+2022-04-23 16:25:14,062   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 0.25
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.2, 0.2]
+2022-04-23 16:25:14,063   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.1
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2022-04-23 16:25:14,063   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: True
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.2
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 1000
+2022-04-23 16:25:14,063   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 83
+2022-04-23 16:25:14,063   INFO  
+cfg.OPTIMIZATION = edict()
+2022-04-23 16:25:14,063   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 2
+2022-04-23 16:25:14,063   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 20
+2022-04-23 16:25:14,063   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.LR: 0.003
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.LR_WARMUP: True
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2022-04-23 16:25:14,064   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2022-04-23 16:25:14,064   INFO  cfg.TAG: cbgs_pp_multihead
+2022-04-23 16:25:14,064   INFO  cfg.EXP_GROUP_PATH: workspace/cfgs
+2022-04-23 16:25:17,137   INFO  Database filter by min points car: 339949 => 294532
+2022-04-23 16:25:17,153   INFO  Database filter by min points truck: 65262 => 60344
+2022-04-23 16:25:17,156   INFO  Database filter by min points construction_vehicle: 11050 => 10589
+2022-04-23 16:25:17,158   INFO  Database filter by min points bus: 12286 => 11619
+2022-04-23 16:25:17,160   INFO  Database filter by min points trailer: 19202 => 17934
+2022-04-23 16:25:17,176   INFO  Database filter by min points barrier: 107507 => 101993
+2022-04-23 16:25:17,179   INFO  Database filter by min points motorcycle: 8846 => 8055
+2022-04-23 16:25:17,180   INFO  Database filter by min points bicycle: 8185 => 7531
+2022-04-23 16:25:17,203   INFO  Database filter by min points pedestrian: 161928 => 148520
+2022-04-23 16:25:17,221   INFO  Database filter by min points traffic_cone: 62964 => 55504
+2022-04-23 16:25:17,324   INFO  Loading NuScenes dataset
+2022-04-23 16:25:19,549   INFO  Total samples for NuScenes dataset: 28130
+2022-04-23 16:25:19,914   INFO  Total samples after balanced resampling: 123580
+2022-04-23 16:25:28,800   INFO  DistributedDataParallel(
+  (module): PointPillar(
+    (vfe): PillarVFE(
+      (pfn_layers): ModuleList(
+        (0): PFNLayer(
+          (linear): Linear(in_features=11, out_features=64, bias=False)
+          (norm): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (backbone_3d): None
+    (map_to_bev_module): PointPillarScatter()
+    (pfe): None
+    (backbone_2d): BaseBEVBackbone(
+      (blocks): ModuleList(
+        (0): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+        )
+        (1): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+        (2): Sequential(
+          (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+          (1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), bias=False)
+          (2): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (3): ReLU()
+          (4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (5): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (6): ReLU()
+          (7): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (8): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (9): ReLU()
+          (10): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (11): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (12): ReLU()
+          (13): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (14): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (15): ReLU()
+          (16): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (17): BatchNorm2d(256, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (18): ReLU()
+        )
+      )
+      (deblocks): ModuleList(
+        (0): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (1): Sequential(
+          (0): ConvTranspose2d(128, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+        (2): Sequential(
+          (0): ConvTranspose2d(256, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+          (2): ReLU()
+        )
+      )
+    )
+    (dense_head): AnchorHeadMulti(
+      (cls_loss_func): SigmoidFocalClassificationLoss()
+      (reg_loss_func): WeightedL1Loss()
+      (dir_loss_func): WeightedCrossEntropyLoss()
+      (shared_conv): Sequential(
+        (0): Conv2d(384, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (rpn_heads): ModuleList(
+        (0): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+        (1): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+        (2): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+        (3): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 6, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 2, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+        (4): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+        (5): SingleHead(
+          (blocks): ModuleList()
+          (deblocks): ModuleList()
+          (conv_box): ModuleDict(
+            (conv_reg): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_height): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 4, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_size): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_angle): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+            (conv_velo): Sequential(
+              (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+              (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              (2): ReLU()
+              (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+            )
+          )
+          (conv_cls): Sequential(
+            (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+            (3): Conv2d(64, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+        )
+      )
+    )
+    (point_head): None
+    (roi_head): None
+  )
+)
+2022-04-23 16:25:28,804   INFO  **********************Start training workspace/cfgs/cbgs_pp_multihead(default)**********************
+2022-04-24 09:30:42,852   INFO  **********************End training workspace/cfgs/cbgs_pp_multihead(default)**********************
+
+
+
+2022-04-24 09:30:42,853   INFO  **********************Start evaluation workspace/cfgs/cbgs_pp_multihead(default)**********************
+2022-04-24 09:30:42,853   INFO  Loading NuScenes dataset
+2022-04-24 09:30:43,941   INFO  Total samples for NuScenes dataset: 6019
+2022-04-24 09:30:43,944   INFO  ==> Loading parameters from checkpoint /workspace/OpenPCDet/output/workspace/cfgs/cbgs_pp_multihead/default/ckpt/checkpoint_epoch_20.pth to CPU
+2022-04-24 09:30:43,998   INFO  ==> Checkpoint trained from version: pcdet+0.5.2+274c90c
+2022-04-24 09:30:44,868   INFO  ==> Done (loaded 421/421)
+2022-04-24 09:30:44,872   INFO  *************** EPOCH 20 EVALUATION *****************
+2022-04-24 09:32:48,898   INFO  *************** Performance of EPOCH 20 *****************
+2022-04-24 09:32:48,898   INFO  Generate label finished(sec_per_example: 0.0206 second).
+2022-04-24 09:32:48,898   INFO  recall_roi_0.3: 0.000000
+2022-04-24 09:32:48,899   INFO  recall_rcnn_0.3: 0.718711
+2022-04-24 09:32:48,899   INFO  recall_roi_0.5: 0.000000
+2022-04-24 09:32:48,899   INFO  recall_rcnn_0.5: 0.509405
+2022-04-24 09:32:48,899   INFO  recall_roi_0.7: 0.000000
+2022-04-24 09:32:48,899   INFO  recall_rcnn_0.7: 0.227635
+2022-04-24 09:32:48,902   INFO  Average predicted number of objects(6019 samples): 94.965
+2022-04-24 09:35:13,765   INFO  The predictions of NuScenes have been saved to /workspace/OpenPCDet/output/workspace/cfgs/cbgs_pp_multihead/default/eval/eval_with_train/epoch_20/val/final_result/data/results_nusc.json
+2022-04-24 09:37:33,846   INFO  ----------------Nuscene detection_cvpr_2019 results-----------------
+***car error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.19, 0.16, 0.12, 0.27, 0.21 | 70.76, 81.36, 84.73, 86.60 | mean AP: 0.8086269244040032
+***truck error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.36, 0.19, 0.11, 0.22, 0.24 | 31.29, 49.42, 58.29, 61.47 | mean AP: 0.5012039355955868
+***construction_vehicle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.79, 0.46, 0.85, 0.12, 0.33 | 0.46, 7.22, 21.77, 27.81 | mean AP: 0.1431746462206453
+***bus error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.37, 0.18, 0.06, 0.46, 0.27 | 38.97, 59.27, 74.69, 77.02 | mean AP: 0.6248674242275527
+***trailer error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.62, 0.21, 0.38, 0.17, 0.17 | 7.78, 27.75, 50.00, 58.17 | mean AP: 0.35927497545422876
+***barrier error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.34, 0.28, 0.08, nan, nan | 33.02, 50.07, 57.11, 59.86 | mean AP: 0.5001658432476616
+***motorcycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.22, 0.24, 0.40, 0.54, 0.26 | 26.91, 30.95, 31.49, 31.68 | mean AP: 0.3025439595946236
+***bicycle error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.19, 0.28, 0.64, 0.27, 0.03 | 6.83, 7.11, 7.11, 7.33 | mean AP: 0.07095322389410327
+***pedestrian error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.17, 0.28, 0.37, 0.26, 0.08 | 68.91, 70.86, 72.83, 74.49 | mean AP: 0.7177290483486605
+***traffic_cone error@trans, scale, orient, vel, attr | AP@0.5, 1.0, 2.0, 4.0
+0.18, 0.34, nan, nan, nan | 41.25, 44.10, 46.58, 51.00 | mean AP: 0.45732481641519873
+--------------average performance-------------
+trans_err:       0.3439
+scale_err:       0.2609
+orient_err:      0.3340
+vel_err:         0.2885
+attr_err:        0.1991
+mAP:     0.4486
+NDS:     0.5817
+
+2022-04-24 09:37:33,847   INFO  Result is save to /workspace/OpenPCDet/output/workspace/cfgs/cbgs_pp_multihead/default/eval/eval_with_train/epoch_20/val
+2022-04-24 09:37:33,847   INFO  ****************Evaluation done.*****************
+2022-04-24 09:37:33,876   INFO  Epoch 20 has been evaluated
+2022-04-24 09:38:03,908   INFO  **********************End evaluation workspace/cfgs/cbgs_pp_multihead(default)**********************
+

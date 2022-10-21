@@ -1,0 +1,53 @@
+[ERROR][/torch/catch/torch_mlu/csrc/aten/util/version.cpp][line: 69][parse][thread:140115127170880][process:639]: Unknown library version string :1.2.0-torch1.6
+[ERROR][/torch/catch/torch_mlu/csrc/aten/util/version.cpp][line: 69][parse][thread:140331541501760][process:640]: Unknown library version string :1.2.0-torch1.6
+device: mlu:1 n_gpu: 2, distributed training: True, 16-bits training: True
+device: mlu:0 n_gpu: 2, distributed training: True, 16-bits training: True
+[WARNING][/torch/catch/torch_mlu/csrc/aten/util/version.cpp][line: 133][operator()][thread:140115127170880][process:639]: Cambricon NEUWARE minimum version requirements not met! Require DRIVER minimum verion is 4.20.4-1, but current version is 4.15.14-1
+[WARNING][/torch/catch/torch_mlu/csrc/aten/util/version.cpp][line: 133][operator()][thread:140331541501760][process:640]: Cambricon NEUWARE minimum version requirements not met! Require DRIVER minimum verion is 4.20.4-1, but current version is 4.15.14-1
+cnmix pytorch >>>> inside torch initialize
+models will be casted to torch.float16
+cast the model output data type  to torch.float32
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/mlu_model.py:629: UserWarning: torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. When the parameter setting value is 8 or 16, the calculation accuracymay be affected..
+  "torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. "
+Torch distributed is available.
+Torch distributed is initialized.
+cnmix pytorch >>>> inside torch initialize
+models will be casted to torch.float16
+cast the model output data type  to torch.float32
+/torch/venv3/pytorch/lib/python3.6/site-packages/torch_mlu/core/mlu_model.py:629: UserWarning: torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. When the parameter setting value is 8 or 16, the calculation accuracymay be affected..
+  "torch_mlu.core.mlu_model.set_quantized_bitwidth is deprecated. "
+Torch distributed is available.
+Torch distributed is initialized.
+[3-25 11:50:11] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[3-25 11:50:11] [LOG_CNCL] [Info]: CNCL_LOG_LEVEL: INFO
+[3-25 11:50:11] [LOG_CNCL] [Info]: Build 2 rings. Ring 0: 1--[MLU_LINK]->0--[MLU_LINK]->1
+[3-25 11:50:11] [LOG_CNCL] [Info]: Build 2 rings. Ring 0: 0--[MLU_LINK]->1--[MLU_LINK]->0
+[3-25 11:50:11] [LOG_CNCL] [Info]: Build 2 rings. Ring 1: 1--[MLU_LINK]->0--[MLU_LINK]->1
+[3-25 11:50:11] [LOG_CNCL] [Info]: Build 2 rings. Ring 1: 0--[MLU_LINK]->1--[MLU_LINK]->0
+[14592, 3278]
+[14592, 3278]
+Traceback (most recent call last):
+  File "./run_pretraining.py", line 1681, in <module>
+Traceback (most recent call last):
+  File "./run_pretraining.py", line 1681, in <module>
+    args, final_loss, train_time_raw = main()
+  File "./run_pretraining.py", line 1089, in main
+    args, final_loss, train_time_raw = main()
+  File "./run_pretraining.py", line 1089, in main
+    InitMHACUDAExtension()
+NameError: name 'InitMHACUDAExtension' is not defined
+    InitMHACUDAExtension()
+NameError: name 'InitMHACUDAExtension' is not defined
+Traceback (most recent call last):
+  File "/opt/py3.6/lib/python3.6/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/opt/py3.6/lib/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/torch/venv3/pytorch/lib/python3.6/site-packages/torch/distributed/launch.py", line 261, in <module>
+    main()
+  File "/torch/venv3/pytorch/lib/python3.6/site-packages/torch/distributed/launch.py", line 257, in main
+    cmd=cmd)
+subprocess.CalledProcessError: Command '['/torch/venv3/pytorch/bin/python', '-u', './run_pretraining.py', '--local_rank=1', '--train_batch_size=20', '--learning_rate=4e-4', '--opt_lamb_beta_1=0.9', '--opt_lamb_beta_2=0.999', '--warmup_proportion=0.0', '--warmup_steps=0.0', '--start_warmup_step=0', '--max_steps=200000', '--phase2', '--max_seq_length=512', '--max_predictions_per_seq=76', '--input_dir=/data/pytorch/datasets/bert_data//2048_shards_uncompressed', '--init_checkpoint=/data/pytorch/datasets/bert_data//model.ckpt-28252.pt', '--do_train', '--skip_checkpoint', '--train_mlm_accuracy_window_size=0', '--target_mlm_accuracy=0.720', '--weight_decay_rate=0.01', '--max_samples_termination=9000000', '--eval_iter_start_samples=150000', '--eval_iter_samples=150000', '--eval_batch_size=8', '--eval_dir=/data/pytorch/datasets/bert_data//eval_set_uncompressed/', '--cache_eval_data', '--output_dir=./results', '--fp16', '--fused_gelu_bias', '--dense_seq_output', '--dwu-num-rs-pg=1', '--dwu-num-ar-pg=1', '--dwu-num-blocks=1', '--gradient_accumulation_steps=1', '--log_freq=1', '--bert_config_path=/data/pytorch/datasets/bert_data//bert_config.json', '--allreduce_post_accumulation_fp16', '--use_ddp', '--ddp_type=native', '--use-mlu', '--unpad', '--exchange_padding']' returned non-zero exit status 1.
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************

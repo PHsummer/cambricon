@@ -1,0 +1,2 @@
+node0_ip slots=16
+node1_ip slots=16

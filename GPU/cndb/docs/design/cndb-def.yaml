@@ -1,0 +1,90 @@
+swagger: "2.0"
+info:
+  description: "Train DB"
+  version: "0.1.0"
+  title: "Train DB"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "liangfan@cambricon.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+definitions:
+  Model:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      metrics:
+        type: "array"
+        items:
+          type: "string"
+      categories:
+        type: "array"
+        items:
+          type: "string"
+  SoftwareInfo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      detail:
+        type: "object"
+  HardwareInfo:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      detail:
+        type: "object"
+  TrainResult:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      md5:
+        type: "string"
+      framework:
+        type: "string"
+      dataset:
+        type: "string"
+      batch_size:
+        type: "integer"
+      device:
+        type: "string"
+      dev_num:
+        type: "integer"
+      train_exec_mode:
+        type: "string"
+      eval_exec_mode:
+        type: "string"
+      dist_mode:
+        type: "string"
+      performance:
+        type: "object"
+      metrics:
+        type: "object"
+      hyper_params:
+        type: "object"
+      model:
+        $ref: "#/definitions/Model"
+      soft_info:
+        $ref: "#/definitions/SoftwareInfo"
+      hard_info:
+        $ref: "#/definitions/HardwareInfo"
+      cmd:
+        type: "string"
+      code_link:
+        type: "string"
+      tags:
+        type: "array"
+        items:
+          type: "string"
+      extra:
+        type: "object"

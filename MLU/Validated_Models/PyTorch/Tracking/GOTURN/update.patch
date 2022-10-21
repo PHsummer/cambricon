@@ -1,0 +1,48 @@
+diff --git a/src/train.py b/src/train.py
+index 2c852a6..f9ded25 100644
+--- a/src/train.py
++++ b/src/train.py
+@@ -236,6 +236,9 @@ def train_model(model, datasets, criterion, optimizer):
+     if not os.path.isdir(args.save_directory):
+         os.makedirs(args.save_directory)
+ 
++    # speed cal 
++    speed_total = []
++
+     itr = start_itr
+     st = time.time()
+     while itr < args.num_batches:
+@@ -265,7 +268,8 @@ def train_model(model, datasets, criterion, optimizer):
+                 x1 = train_batch['previmg'].to(device)
+                 x2 = train_batch['currimg'].to(device)
+                 y = train_batch['currbb'].requires_grad_(False).to(device)
+-
++                
++                srt = time.time()
+                 # zero the parameter gradients
+                 optimizer.zero_grad()
+ 
+@@ -281,8 +285,12 @@ def train_model(model, datasets, criterion, optimizer):
+                 curr_loss = loss.item()
+                 end = time.time()
+                 itr = itr + 1
+-                print('[training] step = %d/%d, loss = %f, time = %f'
+-                      % (itr, args.num_batches, curr_loss, end-st))
++
++                # speed cal 
++                speed = batchSize / (end-srt)
++                speed_total.append(speed)
++                print('[training] step = %d/%d, loss = %f, time = %f, speed = %f samples/sec'
++                      % (itr, args.num_batches, curr_loss, end-st, speed))
+                 sys.stdout.flush()
+                 del(train_batch)
+                 st = time.time()
+@@ -305,6 +313,8 @@ def train_model(model, datasets, criterion, optimizer):
+                                      'running_batch': running_batch,
+                                      'lr': lr,
+                                      'dataset_indx': i}, path)
++    # speed cal                                     
++    print("Speed Avg. %.2f samples/sec"% np.mean(speed_total))
+ 
+     time_elapsed = time.time() - since
+     print('Training complete in {:.0f}m {:.0f}s'.format(

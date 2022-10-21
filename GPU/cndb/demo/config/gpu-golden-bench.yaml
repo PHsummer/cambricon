@@ -1,0 +1,9 @@
+schema: "postgresql"
+user: "postgres"
+passwd: ""
+host: "10.100.99.15"
+port: 30504
+database: "gpu_golden_bench"
+type: "postgres"
+verbose: 0
+rebuild: 0

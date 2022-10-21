@@ -1,0 +1,44 @@
+FROM ubuntu:18.04
+
+RUN mkdir -p /root/.pip && \
+    echo "[global]" > /root/.pip/pip.conf && \
+    echo "index-url = https://mirrors.aliyun.com/pypi/simple/" >> /root/.pip/pip.conf && \
+    echo "trusted-host = mirrors.aliyun.com" >> /root/.pip/pip.conf
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        apt-utils \
+        build-essential \
+        wget \
+        curl \
+        gcc \
+        ssh \
+        git \
+        vim \
+        libffi-dev \
+        zlib1g-dev \
+        pkg-config \
+        openssl \
+        libssl-dev \
+        software-properties-common \
+        cmake \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cd /tmp/ && \
+    wget -O py3.7.8_pkg.tgz http://gitlab.software.cambricon.com/neuware/platform/extra-dependencies/raw/master/python/Python-3.7.8.tgz && \
+    tar -zxvf py3.7.8_pkg.tgz && \
+    cd Python-3.7.8 && \
+    ./configure --prefix=/usr/local/python3.7 --with-ssl && \
+    make -j && make install && \
+    cd ../ && rm -rf Python-3.7.8 && \
+    rm -f py3.7.8_pkg.tgz && \
+    ln -s /usr/local/python3.7/bin/python3 /usr/local/bin/python3.7 && \
+    ln -s /usr/local/python3.7/bin/python3 /usr/local/bin/python && \
+    ln -s /usr/local/python3.7/bin/pip3 /usr/local/bin/pip3 && \
+    ln -s /usr/local/python3.7/bin/pip3 /usr/local/bin/pip || true
+ENV PATH /usr/local/python3.7/bin:$PATH

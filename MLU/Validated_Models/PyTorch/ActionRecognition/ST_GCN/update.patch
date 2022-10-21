@@ -1,0 +1,117 @@
+diff --git a/--device b/--device
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/[--video b/[--video
+deleted file mode 100644
+index e69de29..0000000
+diff --git a/config_update.py b/config_update.py
+new file mode 100644
+index 0000000..977b892
+--- /dev/null
++++ b/config_update.py
+@@ -0,0 +1,28 @@
++import os, sys
++import yaml
++import argparse
++
++if __name__ == '__main__':
++    
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--config', type=str, default='./config/st_gcn/kinetics-skeleton/train.yaml')
++    parser.add_argument('--data_path', type=str, default="/algo/modelzoo/datasets/COCO17/")
++    parser.add_argument('--num_gpus', type=int, default=1)
++    parser.add_argument('--batch_size', type=int, default=64)
++    parser.add_argument('--epochs', type=int, default=50)
++    args = parser.parse_args()
++
++
++    with open(args.config, 'r') as f:
++        default_arg = yaml.load(f, Loader=yaml.FullLoader)
++        default_arg["train_feeder_args"]["data_path"] = os.path.join(args.data_path, "train_data.npy")
++        default_arg["train_feeder_args"]["label_path"] = os.path.join(args.data_path, "train_label.pkl")
++        default_arg["test_feeder_args"]["data_path"] = os.path.join(args.data_path, "val_data.npy")
++        default_arg["test_feeder_args"]["label_path"] = os.path.join(args.data_path, "val_label.pkl")
++
++        default_arg["device"] = [i for i in range(args.num_gpus)]
++        default_arg["batch_size"] = args.batch_size
++        default_arg["num_epoch"] = args.epochs
++
++    with open(args.config,'w') as dumpfile:
++        dumpfile.write(yaml.dump(default_arg))
+\ No newline at end of file
+diff --git a/processor/io.py b/processor/io.py
+index 51d65bb..fe96c4e 100644
+--- a/processor/io.py
++++ b/processor/io.py
+@@ -37,7 +37,7 @@ class IO():
+             # load config file
+             with open(p.config, 'r') as f:
+                 # default_arg是字典的形式
+-                default_arg = yaml.load(f)
++                default_arg = yaml.load(f, Loader=yaml.FullLoader)
+ 
+             # update parser from config file
+             # vars() 函数返回对象object的属性和属性值的字典对象
+diff --git a/processor/processor.py b/processor/processor.py
+index c488c9f..f08c94f 100644
+--- a/processor/processor.py
++++ b/processor/processor.py
+@@ -5,6 +5,7 @@ import sys
+ import argparse
+ import yaml
+ import numpy as np
++import time
+ 
+ # torch
+ import torch
+@@ -58,6 +59,7 @@ class Processor(IO):
+                 num_workers=self.arg.num_worker * torchlight.ngpu(
+                     self.arg.device),
+                 drop_last=True)
++            self.total_data=len(Feeder(**self.arg.train_feeder_args))
+         if self.arg.test_feeder_args:
+             self.data_loader['test'] = torch.utils.data.DataLoader(
+                 dataset=Feeder(**self.arg.test_feeder_args),
+@@ -106,14 +108,21 @@ class Processor(IO):
+ 
+         # training phase
+         if self.arg.phase == 'train':
++            speed_total=[]
+             for epoch in range(self.arg.start_epoch, self.arg.num_epoch):
+                 self.meta_info['epoch'] = epoch
+ 
++                srt = time.time()
+                 # training
+                 self.io.print_log('Training epoch: {}'.format(epoch))
+                 self.train()
+                 self.io.print_log('Done.')
+ 
++                # speed cal 
++                end = time.time()
++                speed = self.total_data / (end-srt)
++                speed_total.append(speed)
++
+                 # save model
+                 if ((epoch + 1) % self.arg.save_interval == 0) or (
+                         epoch + 1 == self.arg.num_epoch):
+@@ -121,11 +130,15 @@ class Processor(IO):
+                     self.io.save_model(self.model, filename)
+ 
+                 # evaluation
+-                if ((epoch + 1) % self.arg.eval_interval == 0) or (
+-                        epoch + 1 == self.arg.num_epoch):
+-                    self.io.print_log('Eval epoch: {}'.format(epoch))
+-                    self.test()
+-                    self.io.print_log('Done.')
++                # if ((epoch + 1) % self.arg.eval_interval == 0) or (
++                        # epoch + 1 == self.arg.num_epoch):
++                    # self.io.print_log('Eval epoch: {}'.format(epoch))
++                    # self.test()
++                    # self.io.print_log('Done.')
++                print("Speed", speed)
++            # speed cal                                     
++            print("Speed Avg. %.2f samples/sec"% np.mean(speed_total))
++
+         # test phase
+         elif self.arg.phase == 'test':
+ 

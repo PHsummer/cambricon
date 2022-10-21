@@ -1,0 +1,12 @@
+name: "ctr0.9-rc1"
+os: ubuntu16.04
+driver: v4.7.3
+toolkit: v1.5.3
+cnnl: v1.1.2
+cncl: v0.6.0
+cnml: v7.9.2
+cnplugin: v1.11.1
+cnpytorch: v0.13.1
+cntf: v1.1.0
+cnhorovod: v0.6.0
+openmpi: v4.0.5

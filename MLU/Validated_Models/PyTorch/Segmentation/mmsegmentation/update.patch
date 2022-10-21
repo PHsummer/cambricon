@@ -1,0 +1,129 @@
+diff --git a/tools/config_update.py b/tools/config_update.py
+new file mode 100644
+index 0000000..23ab565
+--- /dev/null
++++ b/tools/config_update.py
+@@ -0,0 +1,82 @@
++import os, sys
++import argparse
++from importlib import import_module
++
++def file_modify(cur_path, module_name):
++    sys.path.append(cur_path)
++    config = import_module(os.path.splitext(module_name)[0])
++    cont = open(os.path.join(cur_path, module_name)).readlines()
++    for idx in range(len(cont)):
++        try:
++            if config.data_root in cont[idx]:
++                cont[idx] = cont[idx].replace(config.data_root, args.data_path)
++        except: pass
++
++        try:
++            if "samples_per_gpu" in cont[idx]:
++                cont[idx] = cont[idx].replace(str(config.data["samples_per_gpu"]), str(args.batch_size))
++        except: pass
++
++        try:
++            if "max_epochs" in cont[idx]:
++                replace_num = config.runner["max_epochs"]
++                if not args.epochs:
++                    cont[idx] = cont[idx].replace("EpochBasedRunner", "IterBasedRunner")
++                    cont[idx] = cont[idx].replace("max_epochs", "max_iters")
++                    cont[idx] = cont[idx].replace(str(replace_num), str(args.iters))
++                cont[idx] = cont[idx].replace(str(replace_num), str(args.epochs))
++        except: pass
++
++        try:
++            if "max_iters" in cont[idx]:
++                replace_num = config.runner["max_iters"]
++                if not args.iters:
++                    cont[idx] = cont[idx].replace("IterBasedRunner", "EpochBasedRunner")
++                    cont[idx] = cont[idx].replace("max_iters", "max_epochs")
++                    cont[idx] = cont[idx].replace(str(replace_num), str(args.epochs))
++                cont[idx] = cont[idx].replace(str(replace_num), str(args.iters))
++        except: pass
++
++        try:
++            if "interval" in cont[idx]:
++                cont[idx] = cont[idx].replace(str(config.log_config["interval"]), str(args.interval))
++        except: pass
++
++    f = open(os.path.join(cur_path, module_name), "w")
++    for line in cont: f.write(line)
++
++
++def file_loop(base_path, config_name):
++    sys.path.append(base_path)
++    try:
++        config_base = import_module(os.path.splitext(config_name)[0])
++        config_base = config_base._base_
++    except: return
++
++    if type(config_base) is str:
++        config_base = config_base.split(",")
++    # config_base.append(config_name)
++    file_modify(base_path, config_name)
++
++    for config_file in config_base:
++        module_path, module_name = os.path.split(config_file)
++        cur_path = os.path.join(base_path, module_path)
++        # print(cur_path)
++        file_loop(cur_path, module_name)
++        file_modify(cur_path, module_name)
++
++
++if __name__ == '__main__':
++    
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--config', type=str, default='./configs/yolo/yolov3_d53_mstrain-416_273e_coco.py')
++    parser.add_argument('--data_path', type=str, default="/algo/modelzoo/datasets/COCO17/")
++    parser.add_argument('--batch_size', type=int, default=2)
++    parser.add_argument('--epochs', type=int, default=0)
++    parser.add_argument('--iters', type=int, default=0)
++    parser.add_argument('--interval', type=int, default=50)
++    args = parser.parse_args()
++
++    config_path, config_name = os.path.split(args.config)
++    file_loop(config_path, config_name)
++    print(args.config, "Modified.")
+\ No newline at end of file
+diff --git a/tools/dist_train.sh b/tools/dist_train.sh
+index a857df7..823a6dd 100755
+--- a/tools/dist_train.sh
++++ b/tools/dist_train.sh
+@@ -1,10 +1,25 @@
++#!/usr/bin/env bash
++
+ CONFIG=$1
+ GPUS=$2
++DATASET=$3
++BATCH_SIZE=$4
++EPOCHS=$5
++ITERS=$6
++INTERVAL=$7
+ NNODES=${NNODES:-1}
+ NODE_RANK=${NODE_RANK:-0}
+ PORT=${PORT:-29500}
+ MASTER_ADDR=${MASTER_ADDR:-"127.0.0.1"}
+ 
++python $(dirname "$0")/config_update.py \
++--config=$CONFIG \
++--data_path=$DATASET \
++--batch_size=$BATCH_SIZE \
++--epochs=$EPOCHS \
++--iters=$ITERS \
++--interval=$INTERVAL
++
+ PYTHONPATH="$(dirname $0)/..":$PYTHONPATH \
+ python -m torch.distributed.launch \
+     --nnodes=$NNODES \
+@@ -14,4 +29,7 @@ python -m torch.distributed.launch \
+     --master_port=$PORT \
+     $(dirname "$0")/train.py \
+     $CONFIG \
+-    --launcher pytorch ${@:3}
++    --seed 0 \
++    --deterministic \
++    --launcher pytorch \
++    --no-validate
+\ No newline at end of file

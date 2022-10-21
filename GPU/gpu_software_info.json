@@ -1,0 +1,17 @@
+{
+    "nvcr.io/nvidia/pytorch:21.06-py3":{"pytorch_version":"1.9.0a0+c3d40fd", "cuda_version":"11.3.1", "cudnn_version":"8.2.1"},
+    "nvcr.io/nvidia/pytorch:22.01-py3":{"pytorch_version":"1.11.0a0+bfe5ad28", "cuda_version":"11.6.0", "cudnn_version":"8.3.2.44"},
+    "nvcr.io/nvidia/tensorflow:21.05-tf2-py3":{"tensorflow_version":"2.4.0", "cuda_version":"11.3.0", "cudnn_version":"8.2.0.51"},
+    "nvcr.io/nvidia/tensorflow:22.01-tf2-py3":{"tensorflow_version":"2.7.0", "cuda_version":"11.6.0", "cudnn_version":"8.3.2"},
+    "nvcr.io/nvidia/tensorflow:22.01-tf1-py3":{"tensorflow_version":"1.15.5", "cuda_version":"11.6.0", "cudnn_version":"8.3.2"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:resnet50v1.5-22.01-pytorch-py3": {"pytorch_version": "1.11.0a0+bfe5ad28", "cuda_version":"11.6.0", "cudnn_version":"8.3.2.44"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:bert-crf-22.01-tf1-py3":{"tensorflow_version":"1.15.5", "cuda_version":"11.6.0", "cudnn_version":"8.3.2"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:deepfm-22.01-tf1-py3":{"tensorflow_version":"1.15.5", "cuda_version":"11.6.0", "cudnn_version":"8.3.2"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:ECAPA-TDNN-26.07-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.1", "cudnn_version":"8.2.1"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:enet-21.06-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.109", "cudnn_version":"7.6.5"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:GraphSAGE-22.01-tf1-py3": {"tensorflow_version":"1.15.5", "cuda_version":"11.6.0", "cudnn_version":"8.3.2"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:mobilenet50v2-21.06-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.109", "cudnn_version":"7.6.5"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:pix2pix-21.06-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.109", "cudnn_version":"7.6.5"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:atss-r50-21.06-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.109", "cudnn_version":"7.6.5"},
+    "yellow.hub.cambricon.com/cair_modelzoo/gpu_golden_bench:lidar_rcnn-21.06-pytorch-py3":{"pytorch_version":"1.9.0", "cuda_version":"11.3.109", "cudnn_version":"7.6.5"}
+}

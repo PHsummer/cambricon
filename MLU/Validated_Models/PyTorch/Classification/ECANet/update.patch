@@ -1,0 +1,90 @@
+diff --git a/main.py b/main.py
+index 75d98c0..a5bdd74 100644
+--- a/main.py
++++ b/main.py
+@@ -66,8 +66,10 @@ parser.add_argument('--ksize', default=None, type=list,
+                     help='Manually select the eca module kernel size')
+ parser.add_argument('--action', default='', type=str,
+                     help='other information.')
+-                    
++parser.add_argument('--iters', type=int, default=30000, metavar='N',
++                    help='iters per epoch')
+ 
++                    
+ best_prec1 = 0
+ 
+ 
+@@ -213,29 +215,30 @@ def main():
+         train_prec1_plot[epoch] = train_prec1_temp
+         train_prec5_plot[epoch] = train_prec5_temp
+ 
+-        # evaluate on validation set
+-        # prec1 = validate(val_loader, model, criterion)
+-        prec1, prec5 = validate(val_loader, model, criterion)
+-        val_prec1_plot[epoch] = prec1
+-        val_prec5_plot[epoch] = prec5
+-
+-        # remember best prec@1 and save checkpoint
+-        is_best = prec1 > best_prec1
+-        best_prec1 = max(prec1, best_prec1)
+-        save_checkpoint({
+-            'epoch': epoch + 1,
+-            'arch': args.arch,
+-            'state_dict': model.state_dict(),
+-            'best_prec1': best_prec1,
+-            'optimizer' : optimizer.state_dict(),
+-        }, is_best)
++        if args.evaluate:
++            # evaluate on validation set
++            # prec1 = validate(val_loader, model, criterion)
++            prec1, prec5 = validate(val_loader, model, criterion)
++            val_prec1_plot[epoch] = prec1
++            val_prec5_plot[epoch] = prec5
++
++            # remember best prec@1 and save checkpoint
++            is_best = prec1 > best_prec1
++            best_prec1 = max(prec1, best_prec1)
++            save_checkpoint({
++                'epoch': epoch + 1,
++                'arch': args.arch,
++                'state_dict': model.state_dict(),
++                'best_prec1': best_prec1,
++                'optimizer' : optimizer.state_dict(),
++            }, is_best)
+         
+-        # 将Loss,train_prec1,train_prec5,val_prec1,val_prec5用.txt的文件存起来
+-        data_save(directory + 'Loss_plot.txt', Loss_plot)
+-        data_save(directory + 'train_prec1.txt', train_prec1_plot)
+-        data_save(directory + 'train_prec5.txt', train_prec5_plot)
+-        data_save(directory + 'val_prec1.txt', val_prec1_plot)
+-        data_save(directory + 'val_prec5.txt', val_prec5_plot)
++            # 将Loss,train_prec1,train_prec5,val_prec1,val_prec5用.txt的文件存起来
++            data_save(directory + 'Loss_plot.txt', Loss_plot)
++            data_save(directory + 'train_prec1.txt', train_prec1_plot)
++            data_save(directory + 'train_prec5.txt', train_prec5_plot)
++            data_save(directory + 'val_prec1.txt', val_prec1_plot)
++            data_save(directory + 'val_prec5.txt', val_prec5_plot)
+ 
+         end_time = time.time()
+         time_value = (end_time - start_time) / 3600
+@@ -292,7 +295,9 @@ def train(train_loader, model, criterion, optimizer, epoch):
+                   'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
+                    epoch, i, len(train_loader), batch_time=batch_time,
+                    data_time=data_time, loss=losses, top1=top1, top5=top5))
+-
++        if i ==args.iters:
++            break
++                  
+     return losses.avg, top1.avg, top5.avg
+ 
+ 
+@@ -387,7 +392,7 @@ def accuracy(output, target, topk=(1,)):
+ 
+         res = []
+         for k in topk:
+-            correct_k = correct[:k].view(-1).float().sum(0, keepdim=True)
++            correct_k = correct[:k].contiguous().view(-1).float().sum(0, keepdim=True)
+             res.append(correct_k.mul_(100.0 / batch_size))
+         return res
+ 
+

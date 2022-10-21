@@ -1,0 +1,1 @@
+docker rmi --force $(docker images | grep cair_modelzoo | awk '{print $3}')
